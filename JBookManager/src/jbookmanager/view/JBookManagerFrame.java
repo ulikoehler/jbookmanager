@@ -21,7 +21,6 @@ import javax.swing.filechooser.FileFilter;
 import jbookmanager.model.JBookManagerConfiguration;
 import jbookmanager.model.Library;
 import jbookmanager.controller.LibraryManager;
-import jbookmanager.controller.LibraryTableModel;
 
 /**
  *
@@ -34,6 +33,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
     public JBookManagerFrame()
     {
         initComponents();
+        bookViewTable.setLibrary(library);
         fc.setFileFilter(new FileFilter() {
 
             @Override
@@ -74,7 +74,9 @@ public class JBookManagerFrame extends javax.swing.JFrame
                 fc.setDialogTitle(i18n.getString("Create new library"));
                 fc.showSaveDialog(this);
                 File libraryFile = fc.getSelectedFile();
-                config.setProperty("LibraryFile", libraryFile.getAbsolutePath());
+                fc.setDialogType(JFileChooser.SAVE_DIALOG);
+                if(!(libraryFile == null))
+                {config.setProperty("LibraryFile", libraryFile.getAbsolutePath());}
                 library = new Library();
             }
         }
@@ -94,7 +96,14 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        bookViewTable = new jbookmanager.view.BookViewTable();
+        newBookButton = new javax.swing.JButton();
+        filterLabel = new javax.swing.JLabel();
+        filterColumnComboBox = new javax.swing.JComboBox();
+        filterTypeComboBox = new javax.swing.JComboBox();
+        filterStringField = new javax.swing.JTextField();
+        filterOkButton = new javax.swing.JButton();
+        filterDeleteButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newLibraryMenuItem = new javax.swing.JMenuItem();
@@ -105,8 +114,35 @@ public class JBookManagerFrame extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle( i18n.getString("JBookManagerFrame.title")); // NOI18N
 
-        jTable1.setModel(new LibraryTableModel(library));
-        jScrollPane1.setViewportView(jTable1);
+        bookViewTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(bookViewTable);
+
+        newBookButton.setText( i18n.getString("JBookManagerFrame.newBookButton.text")); // NOI18N
+        newBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newBookButtonActionPerformed(evt);
+            }
+        });
+
+        filterLabel.setText( i18n.getString("JBookManagerFrame.filterLabel.text")); // NOI18N
+
+        filterColumnComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Title", "Authors", "Price", "Count", "Comment" }));
+
+        filterTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Contains", "Is", "Regex" }));
+
+        filterOkButton.setText( i18n.getString("JBookManagerFrame.filterOkButton.text")); // NOI18N
+
+        filterDeleteButton.setText( i18n.getString("JBookManagerFrame.filterDeleteButton.text")); // NOI18N
 
         fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
 
@@ -147,16 +183,39 @@ public class JBookManagerFrame extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(newBookButton)
+                        .addGap(53, 53, 53)
+                        .addComponent(filterLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filterColumnComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filterTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filterStringField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filterOkButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filterDeleteButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newBookButton)
+                    .addComponent(filterLabel)
+                    .addComponent(filterColumnComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterStringField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterOkButton)
+                    .addComponent(filterDeleteButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -191,6 +250,12 @@ public class JBookManagerFrame extends javax.swing.JFrame
         library = new Library();
     }//GEN-LAST:event_newLibraryMenuItemActionPerformed
 
+    private void newBookButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newBookButtonActionPerformed
+    {//GEN-HEADEREND:event_newBookButtonActionPerformed
+        NewBookDialog newBookDialog = new NewBookDialog(this, true);
+        newBookDialog.setVisible(true);
+    }//GEN-LAST:event_newBookButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,11 +275,18 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private JBookManagerConfiguration config = new JBookManagerConfiguration();
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private jbookmanager.view.BookViewTable bookViewTable;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JComboBox filterColumnComboBox;
+    private javax.swing.JButton filterDeleteButton;
+    private javax.swing.JLabel filterLabel;
+    private javax.swing.JButton filterOkButton;
+    private javax.swing.JTextField filterStringField;
+    private javax.swing.JComboBox filterTypeComboBox;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JButton newBookButton;
     private javax.swing.JMenuItem newLibraryMenuItem;
     private javax.swing.JMenuItem saveCopyMenuItem;
     private javax.swing.JMenuItem saveLibraryMenuItem;

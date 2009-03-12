@@ -10,6 +10,7 @@
  */
 package jbookmanager.view;
 
+import java.io.Serializable;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
@@ -20,7 +21,7 @@ import jbookmanager.model.Library;
  *
  * @author uli
  */
-public class BookViewTable extends JTable
+public class BookViewTable extends JTable implements Serializable
 {
 
     /** Creates new form BeanForm */
