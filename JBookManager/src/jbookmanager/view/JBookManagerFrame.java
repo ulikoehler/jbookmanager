@@ -66,6 +66,8 @@ public class JBookManagerFrame extends javax.swing.JFrame
         });
 
         initLibrary();
+        //Show the library data
+        bookViewTable.updateData(library);
     }
 
     private void initLibrary()

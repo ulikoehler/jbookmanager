@@ -45,7 +45,11 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="countSpinner" alignment="0" pref="219" max="32767" attributes="0"/>
                           <Component id="titleField" alignment="1" pref="219" max="32767" attributes="0"/>
-                          <Component id="isbnFormattedField" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="isbnField" min="-2" pref="123" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="amazonButton" pref="90" max="32767" attributes="0"/>
+                          </Group>
                           <Component id="priceField" alignment="0" pref="219" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -59,8 +63,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="isbnFormattedField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="isbnLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="amazonButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="isbnField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -80,7 +85,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="commentLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="commentScrollPane" pref="149" max="32767" attributes="0"/>
+                  <Component id="commentScrollPane" pref="145" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="okButton" min="-2" max="-2" attributes="0"/>
@@ -94,13 +99,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.isbnLabel.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="isbnFormattedField">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="" subtype="-1" type="5"/>
         </Property>
       </Properties>
     </Component>
@@ -173,6 +171,21 @@
           <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.priceField.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="amazonButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.amazonButton.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
+        </Property>
+        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.amazonButton.toolTipText" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="amazonButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="isbnField">
     </Component>
   </SubComponents>
 </Form>

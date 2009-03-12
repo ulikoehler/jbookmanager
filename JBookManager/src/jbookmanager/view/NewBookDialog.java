@@ -10,10 +10,13 @@
  */
 package jbookmanager.view;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import jbookmanager.model.AmazonBookInfo;
 import jbookmanager.model.Book;
-import jbookmanager.model.Library;
 
 /**
  *
@@ -43,7 +46,6 @@ public class NewBookDialog extends javax.swing.JDialog
     private void initComponents() {
 
         isbnLabel = new javax.swing.JLabel();
-        isbnFormattedField = new javax.swing.JFormattedTextField();
         titleLabel = new javax.swing.JLabel();
         titleField = new javax.swing.JTextField();
         priceLabel = new javax.swing.JLabel();
@@ -54,17 +56,13 @@ public class NewBookDialog extends javax.swing.JDialog
         commentScrollPane = new javax.swing.JScrollPane();
         commentField = new javax.swing.JTextPane();
         priceField = new javax.swing.JTextField();
+        amazonButton = new javax.swing.JButton();
+        isbnField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle( i18n.getString("NewBookDialog.title")); // NOI18N
 
         isbnLabel.setText( i18n.getString("NewBookDialog.isbnLabel.text")); // NOI18N
-
-        try {
-            isbnFormattedField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         titleLabel.setText( i18n.getString("NewBookDialog.titleLabel.text")); // NOI18N
 
@@ -89,6 +87,14 @@ public class NewBookDialog extends javax.swing.JDialog
 
         priceField.setText( i18n.getString("NewBookDialog.priceField.text")); // NOI18N
 
+        amazonButton.setText( i18n.getString("NewBookDialog.amazonButton.text")); // NOI18N
+        amazonButton.setToolTipText( i18n.getString("NewBookDialog.amazonButton.toolTipText")); // NOI18N
+        amazonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amazonButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,7 +117,10 @@ public class NewBookDialog extends javax.swing.JDialog
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(countSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                             .addComponent(titleField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                            .addComponent(isbnFormattedField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(isbnField, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(amazonButton, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
                             .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -120,8 +129,9 @@ public class NewBookDialog extends javax.swing.JDialog
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(isbnFormattedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(isbnLabel))
+                    .addComponent(isbnLabel)
+                    .addComponent(amazonButton)
+                    .addComponent(isbnField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleLabel)
@@ -137,7 +147,7 @@ public class NewBookDialog extends javax.swing.JDialog
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(commentLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(commentScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+                    .addComponent(commentScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(okButton)
                 .addContainerGap())
@@ -150,12 +160,12 @@ public class NewBookDialog extends javax.swing.JDialog
     {//GEN-HEADEREND:event_okButtonActionPerformed
         Book b = new Book();
         //ISBN
-        b.setIsbn(isbnFormattedField.getText());
+        b.setIsbn(isbnField.getText());
         //Title
         String title = titleField.getText();
         if (title.isEmpty())
         {
-            JOptionPane.showMessageDialog(this, "The title mustn't be empty!", "Error",
+            JOptionPane.showMessageDialog(this,  i18n.getString("EmptyTitleErrorMessage"),  i18n.getString("EmptyTitleErrorTitle"),
                                           JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -174,6 +184,35 @@ public class NewBookDialog extends javax.swing.JDialog
 
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void amazonButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_amazonButtonActionPerformed
+    {//GEN-HEADEREND:event_amazonButtonActionPerformed
+        try
+        {
+            Book amazonBook = AmazonBookInfo.getBookInfo(isbnField.getText());
+            titleField.setText(amazonBook.getTitle());
+            priceField.setText(Double.toString(amazonBook.getPrice()));
+            commentField.setText(amazonBook.getComment());
+
+        }
+        catch (IOException ex)
+        {
+            JOptionPane.showMessageDialog(this, i18n.getString("IOErrorMessage"), i18n.getString("IOErrorTitle"),
+                                          JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(NewBookDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /**
+         * Occurs if no match has been found
+         * -> the downloaded page doesn't describe a book
+         */
+        catch (IllegalStateException ex)
+        {
+            JOptionPane.showMessageDialog(this, i18n.getString("NoSuchBookErrorMessage"), i18n.getString(
+                    "NoSuchBookErrorTitle"), JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(NewBookDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_amazonButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,12 +240,13 @@ public class NewBookDialog extends javax.swing.JDialog
     }
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton amazonButton;
     private javax.swing.JTextPane commentField;
     private javax.swing.JLabel commentLabel;
     private javax.swing.JScrollPane commentScrollPane;
     private javax.swing.JLabel countLabel;
     private jbookmanager.view.NumberSpinner countSpinner;
-    private javax.swing.JFormattedTextField isbnFormattedField;
+    private javax.swing.JTextField isbnField;
     private javax.swing.JLabel isbnLabel;
     private javax.swing.JButton okButton;
     private javax.swing.JTextField priceField;
