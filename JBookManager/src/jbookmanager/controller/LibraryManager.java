@@ -27,15 +27,6 @@ public abstract class LibraryManager
 {
 
     /**
-     * Configures Log4J
-     */
-    static
-    {
-        PropertyConfigurator.configure(ClassLoader.getSystemResource("log4j.properties"));
-        logger = Logger.getLogger(LibraryManager.class);
-    }
-
-    /**
      * This represents the library opened at this time
      */
     public static Library library = new Library();
@@ -53,7 +44,7 @@ public abstract class LibraryManager
         }
         catch (IOException ex)
         {
-            Logger.getLogger(LibraryManager.class.getName()).log(Level.ERROR, null, ex);
+            logger.log(Level.ERROR, null, ex);
         }
         finally
         {
@@ -63,7 +54,7 @@ public abstract class LibraryManager
             }
             catch (IOException ex)
             {
-                Logger.getLogger(LibraryManager.class.getName()).log(Level.ERROR, null, ex);
+                logger.log(Level.ERROR, null, ex);
             }
         }
         return null;
@@ -81,7 +72,7 @@ public abstract class LibraryManager
         }
         catch (IOException ex)
         {
-            Logger.getLogger(LibraryManager.class.getName()).log(Level.ERROR, null, ex);
+            logger.log(Level.ERROR, null, ex);
         }
         finally
         {
@@ -91,10 +82,10 @@ public abstract class LibraryManager
             }
             catch (IOException ex)
             {
-                Logger.getLogger(LibraryManager.class.getName()).log(Level.ERROR, null, ex);
+                logger.log(Level.ERROR, null, ex);
             }
         }
     }
 
-    public static Logger logger;
+    public static Logger logger = Logger.getLogger(LibraryManager.class);
 }

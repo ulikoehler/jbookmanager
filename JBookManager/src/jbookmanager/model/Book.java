@@ -5,6 +5,7 @@
 package jbookmanager.model;
 
 import java.io.Serializable;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -12,13 +13,13 @@ import java.io.Serializable;
  */
 public class Book implements Serializable
 {
-
     private String isbn;
     private String title;
     private String comment;
     //Optional info
     private double price;
     private int count;
+    private static Logger logger = Logger.getLogger(Book.class);
 
     /**
      * @return the isbn
@@ -65,6 +66,13 @@ public class Book implements Serializable
      */
     public void setComment(String comment)
     {
+        /**
+         * Log the change
+         */
+        if(logger.isInfoEnabled())
+        {
+            logger.info("Changed comment of book '" + title + "' from '" + this.comment + "' to '" + comment + "'");
+        }
         this.comment = comment;
     }
 
@@ -81,6 +89,13 @@ public class Book implements Serializable
      */
     public void setCount(int count)
     {
+        /**
+         * Log the change
+         */
+        if(logger.isInfoEnabled())
+        {
+            logger.info("Changed count of book '" + title + "' from '" + this.count + "' to '" + count + "'");
+        }
         this.count = count;
     }
 
@@ -97,6 +112,13 @@ public class Book implements Serializable
      */
     public void setPrice(double price)
     {
+        /**
+         * Log the change
+         */
+        if(logger.isInfoEnabled())
+        {
+            logger.info("Changed price of book '" + title + "' from '" + this.price + "' to '" + price + "'");
+        }
         this.price = price;
     }
 }

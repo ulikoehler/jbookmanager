@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
+import jbookmanager.controller.LibraryManager;
 import jbookmanager.controller.OrderManager;
 
 /**
@@ -19,6 +20,7 @@ public class Library implements Serializable
 
     private Vector<Book> books;
     private OrderManager orderManager = new OrderManager();
+
 
     public Library()
     {
@@ -81,7 +83,7 @@ public class Library implements Serializable
             Book b = getBooks().elementAt(i);
             ret[i][0] = b.getIsbn();
             ret[i][1] = b.getTitle();
-            ret[i][2] = b.getPrice();
+            ret[i][2] = LibraryManager.currencyFormat.format(b.getPrice());
             ret[i][3] = b.getCount();
             ret[i][4] = b.getComment();
         }

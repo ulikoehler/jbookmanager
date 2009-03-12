@@ -24,6 +24,7 @@ import javax.swing.filechooser.FileFilter;
 import jbookmanager.model.JBookManagerConfiguration;
 import jbookmanager.model.Library;
 import jbookmanager.controller.LibraryManager;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
