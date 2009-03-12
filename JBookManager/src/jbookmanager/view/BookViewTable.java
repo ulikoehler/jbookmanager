@@ -76,7 +76,9 @@ public class BookViewTable extends JTable implements Serializable
                         double lastVal = JBookManagerFrame.library.getBookAt(row).getPrice();
                         try
                         {
-                            double doubleVal = new Double((String) getValueAt(row, column));
+                            String value = (String) getValueAt(row, column);
+                            value = value.replace(',', '.'); //Delocalize the input
+                            double doubleVal = new Double(value);
                             JBookManagerFrame.library.getBookAt(row).setPrice(doubleVal);
                         }
                         catch (NumberFormatException ex)
@@ -86,6 +88,8 @@ public class BookViewTable extends JTable implements Serializable
                                     "This value must be a floating-point integer. New value:"),
                                                                        JBookManagerFrame.library.getBookAt(row).
                                     getPrice());
+                            //Delocalize the input
+                            value = value.replace(',', '.');
                             try
                             {
                                 double doubleValue = new Double(value);
@@ -120,7 +124,10 @@ public class BookViewTable extends JTable implements Serializable
                         int lastVal = JBookManagerFrame.library.getBookAt(row).getCount();
                         try
                         {
-                            int intVal = new Integer((String) getValueAt(row, column));
+                            //Delocalize the input
+                            String value = (String) getValueAt(row, column);
+                            value = value.replace(',', '.'); //Delocalize the input
+                            int intVal = new Integer(value);
                             JBookManagerFrame.library.getBookAt(row).setCount(intVal);
                         }
                         catch (NumberFormatException ex)
@@ -130,6 +137,8 @@ public class BookViewTable extends JTable implements Serializable
                                                                 i18n.getString(
                                     "This value must be an Integer. New value:"),
                                                                 JBookManagerFrame.library.getBookAt(row).getCount());
+                            //Delocalize the input
+                            value = value.replace(',', '.');
                             try
                             {
                                 int intVal = new Integer(value);
@@ -137,7 +146,7 @@ public class BookViewTable extends JTable implements Serializable
                                  * If the value entered is not valid this line is not executed
                                  * because the previous line throws a NumberFormatException
                                  */
-                                JBookManagerFrame.library.getBookAt(row).setPrice(intVal);
+                                JBookManagerFrame.library.getBookAt(row).setCount(intVal);
                             }
                             catch (NumberFormatException ex2)
                             {
@@ -146,7 +155,7 @@ public class BookViewTable extends JTable implements Serializable
                                         "Invalid Integer. Setting count to previous value."),
                                                               i18n.getString("Invalid value"),
                                                               JOptionPane.INFORMATION_MESSAGE);
-                                JBookManagerFrame.library.getBookAt(row).setPrice(lastVal);
+                                JBookManagerFrame.library.getBookAt(row).setCount(lastVal);
                                 /**
                                  * At this state the non-integer (bad) value is in the table
                                  * and the good value is in the library, so just update the table data
