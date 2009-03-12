@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import jbookmanager.controller.LibraryManager;
 import jbookmanager.model.AmazonBookInfo;
 import jbookmanager.model.Book;
 
@@ -183,7 +184,7 @@ public class NewBookDialog extends javax.swing.JDialog
         /**
          * Add the book to the library
          */
-        JBookManagerFrame.library.addBook(b);
+        LibraryManager.library.addBook(b);
 
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
@@ -217,30 +218,6 @@ public class NewBookDialog extends javax.swing.JDialog
 
     }//GEN-LAST:event_amazonButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[])
-    {
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-
-            public void run()
-            {
-                NewBookDialog dialog = new NewBookDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter()
-                {
-
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e)
-                    {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton amazonButton;

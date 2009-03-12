@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 import jbookmanager.model.JBookManagerConfiguration;
 import jbookmanager.model.Library;
@@ -35,7 +36,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
     public JBookManagerFrame()
     {
         initComponents();
-        bookViewTable.setLibrary(library);
+        bookViewTable.setLibrary(LibraryManager.library);
 
         fc.setFileFilter(new FileFilter()
         {
@@ -67,7 +68,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
         initLibrary();
         //Show the library data
-        bookViewTable.updateData(library);
+        bookViewTable.updateData(LibraryManager.library);
     }
 
     private void initLibrary()
@@ -77,11 +78,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
             String libraryFilename = config.getProperty("LibraryFile");
             if ((!libraryFilename.isEmpty()) && (new File(libraryFilename).exists()))
             {
-                library = LibraryManager.readLibrary(libraryFilename);
+                LibraryManager.library = LibraryManager.readLibrary(libraryFilename);
             }
             else //Create a new library
             {
-                library = new Library();
+                LibraryManager.library = new Library();
             }
         }
         catch (IOException ex)
@@ -116,6 +117,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
         saveLibraryMenuItem = new javax.swing.JMenuItem();
         saveCopyMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
+        editOrdersMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle( i18n.getString("JBookManagerFrame.title")); // NOI18N
@@ -212,6 +214,15 @@ public class JBookManagerFrame extends javax.swing.JFrame
         menuBar.add(fileMenu);
 
         editMenu.setText( i18n.getString("JBookManagerFrame.editMenu.text")); // NOI18N
+
+        editOrdersMenuItem.setText( i18n.getString("JBookManagerFrame.editOrdersMenuItem.text")); // NOI18N
+        editOrdersMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editOrdersMenuItemActionPerformed(evt);
+            }
+        });
+        editMenu.add(editOrdersMenuItem);
+
         menuBar.add(editMenu);
 
         setJMenuBar(menuBar);
@@ -266,11 +277,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private void saveCopyMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveCopyMenuItemActionPerformed
     {//GEN-HEADEREND:event_saveCopyMenuItemActionPerformed
         //Asks the user in which file to save the library
-        fc.setDialogTitle(i18n.getString("Save copy"));
+        fc.setDialogTitle("Save copy");
         fc.showSaveDialog(this);
         String filename = fc.getSelectedFile().getAbsolutePath();
         //Save the library (as gzipped XML data)
-        LibraryManager.writeLibrary(library, filename);
+        LibraryManager.writeLibrary(LibraryManager.library, filename);
     }//GEN-LAST:event_saveCopyMenuItemActionPerformed
 
     private void saveLibraryMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveLibraryMenuItemActionPerformed
@@ -279,16 +290,16 @@ public class JBookManagerFrame extends javax.swing.JFrame
         if (config.getProperty("LibraryFile").equals(""))
         {
             //Asks the user in which file to save the library
-            fc.setDialogTitle(i18n.getString("Save"));
+            fc.setDialogTitle("Save");
             fc.showSaveDialog(this);
             String filename = fc.getSelectedFile().getAbsolutePath();
             config.setProperty("LibraryFile", filename);
             //Save the library (as gzipped XML data)
-            LibraryManager.writeLibrary(library, filename);
+            LibraryManager.writeLibrary(LibraryManager.library, filename);
             return;
         }
         //Else, if the saving filename is already set in the configuration, use it
-        LibraryManager.writeLibrary(library, config.getProperty("LibraryFile"));
+        LibraryManager.writeLibrary(LibraryManager.library, config.getProperty("LibraryFile"));
     }//GEN-LAST:event_saveLibraryMenuItemActionPerformed
 
     private void newLibraryMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newLibraryMenuItemActionPerformed
@@ -301,17 +312,17 @@ public class JBookManagerFrame extends javax.swing.JFrame
         //Save the library if the user clicked "Yes"
         if (sel == JOptionPane.YES_OPTION)
         {
-            LibraryManager.writeLibrary(library, config.getProperty("LibraryFile"));
+            LibraryManager.writeLibrary(LibraryManager.library, config.getProperty("LibraryFile"));
         }
-        library = new Library();
-        bookViewTable.updateData(library);
+        LibraryManager.library = new Library();
+        bookViewTable.updateData(LibraryManager.library);
     }//GEN-LAST:event_newLibraryMenuItemActionPerformed
 
     private void newBookButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newBookButtonActionPerformed
     {//GEN-HEADEREND:event_newBookButtonActionPerformed
         NewBookDialog newBookDialog = new NewBookDialog(this, true);
         newBookDialog.setVisible(true);
-        bookViewTable.updateData(library);
+        bookViewTable.updateData(LibraryManager.library);
     }//GEN-LAST:event_newBookButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
@@ -362,9 +373,9 @@ public class JBookManagerFrame extends javax.swing.JFrame
         {
             fc.showOpenDialog(this);
             String filename = fc.getSelectedFile().getAbsolutePath();
-            library =
+            LibraryManager.library =
                     LibraryManager.readLibrary(filename);
-            bookViewTable.updateData(library);
+            bookViewTable.updateData(LibraryManager.library);
             config.setProperty("Library", filename);
         }
         catch (FileNotFoundException ex)
@@ -375,9 +386,21 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
     private void deleteBookButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteBookButtonActionPerformed
     {//GEN-HEADEREND:event_deleteBookButtonActionPerformed
-        library.deleteBook(bookViewTable.getSelectedRow());
-        bookViewTable.updateData(library);
+        LibraryManager.library.deleteBook(bookViewTable.getSelectedRow());
+        bookViewTable.updateData(LibraryManager.library);
     }//GEN-LAST:event_deleteBookButtonActionPerformed
+
+    private void editOrdersMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOrdersMenuItemActionPerformed
+    {//GEN-HEADEREND:event_editOrdersMenuItemActionPerformed
+        final OrderManagerFrame mf = new OrderManagerFrame();
+        SwingUtilities.invokeLater(new Runnable() {
+
+            public void run()
+            {
+                mf.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_editOrdersMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,7 +416,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
             }
         });
     }
-    public static Library library = new Library();
+
     private JFileChooser fc = new JFileChooser();
     private JBookManagerConfiguration config = new JBookManagerConfiguration();
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
@@ -401,6 +424,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private jbookmanager.view.BookViewTable bookViewTable;
     private javax.swing.JButton deleteBookButton;
     private javax.swing.JMenu editMenu;
+    private javax.swing.JMenuItem editOrdersMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JComboBox filterColumnComboBox;
     private javax.swing.JButton filterDeleteButton;

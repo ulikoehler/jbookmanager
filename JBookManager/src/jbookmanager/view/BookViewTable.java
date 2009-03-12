@@ -10,6 +10,8 @@
  */
 package jbookmanager.view;
 
+import jbookmanager.controller.*;
+import jbookmanager.view.*;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
@@ -54,13 +56,13 @@ public class BookViewTable extends JTable implements Serializable
                 {
                     case 0: //ISBN
                     {
-                        JBookManagerFrame.library.getBookAt(row).setIsbn((String) getValueAt(row,
+                        LibraryManager.library.getBookAt(row).setIsbn((String) getValueAt(row,
                                                                                              column));
                         break;
                     }
                     case 1: //Title
                     {
-                        JBookManagerFrame.library.getBookAt(row).setTitle(
+                        LibraryManager.library.getBookAt(row).setTitle(
                                 (String) getValueAt(row, column));
                         break;
                     }
@@ -73,20 +75,20 @@ public class BookViewTable extends JTable implements Serializable
                      */
                     case 2: //Price
                     {
-                        double lastVal = JBookManagerFrame.library.getBookAt(row).getPrice();
+                        double lastVal = LibraryManager.library.getBookAt(row).getPrice();
                         try
                         {
                             String value = (String) getValueAt(row, column);
                             value = value.replace(',', '.'); //Delocalize the input
                             double doubleVal = new Double(value);
-                            JBookManagerFrame.library.getBookAt(row).setPrice(doubleVal);
+                            LibraryManager.library.getBookAt(row).setPrice(doubleVal);
                         }
                         catch (NumberFormatException ex)
                         {
                             String value = JOptionPane.showInputDialog(null,
                                                                        
                                      i18n.getString("NoValidFPIMessage"),
-                                                                       JBookManagerFrame.library.getBookAt(row).
+                                                                       LibraryManager.library.getBookAt(row).
                                     getPrice());
                             //Delocalize the input
                             value = value.replace(',', '.');
@@ -97,7 +99,7 @@ public class BookViewTable extends JTable implements Serializable
                                  * If the value entered is not valid this line is not executed
                                  * because the previous line throws a NumberFormatException
                                  */
-                                JBookManagerFrame.library.getBookAt(row).setPrice(doubleValue);
+                                LibraryManager.library.getBookAt(row).setPrice(doubleValue);
                             }
                             catch (NumberFormatException ex2)
                             {
@@ -105,12 +107,12 @@ public class BookViewTable extends JTable implements Serializable
                                                                i18n.getString("NoValidFPIAgainMessage"),
                                                                i18n.getString("InvalidValueTitle"),
                                                               JOptionPane.INFORMATION_MESSAGE);
-                                JBookManagerFrame.library.getBookAt(row).setPrice(lastVal);
+                                LibraryManager.library.getBookAt(row).setPrice(lastVal);
                                 /**
                                  * At this state the non-double (bad) value is in the table
                                  * and the good value is in the library, so just update the table data
                                  */
-                                updateData(JBookManagerFrame.library);
+                                updateData(LibraryManager.library);
                             }
                         }
                         break;
@@ -120,21 +122,21 @@ public class BookViewTable extends JTable implements Serializable
                      */
                     case 3: //Count
                     {
-                        int lastVal = JBookManagerFrame.library.getBookAt(row).getCount();
+                        int lastVal = LibraryManager.library.getBookAt(row).getCount();
                         try
                         {
                             //Delocalize the input
                             String value = (String) getValueAt(row, column);
                             value = value.replace(',', '.'); //Delocalize the input
                             int intVal = new Integer(value);
-                            JBookManagerFrame.library.getBookAt(row).setCount(intVal);
+                            LibraryManager.library.getBookAt(row).setCount(intVal);
                         }
                         catch (NumberFormatException ex)
                         {
                             String value =
                                     JOptionPane.showInputDialog(null,
                                                                  i18n.getString("InvalidIntegerMessage"),
-                                                                JBookManagerFrame.library.getBookAt(row).getCount());
+                                                                LibraryManager.library.getBookAt(row).getCount());
                             //Delocalize the input
                             value = value.replace(',', '.');
                             try
@@ -144,7 +146,7 @@ public class BookViewTable extends JTable implements Serializable
                                  * If the value entered is not valid this line is not executed
                                  * because the previous line throws a NumberFormatException
                                  */
-                                JBookManagerFrame.library.getBookAt(row).setCount(intVal);
+                                LibraryManager.library.getBookAt(row).setCount(intVal);
                             }
                             catch (NumberFormatException ex2)
                             {
@@ -152,19 +154,19 @@ public class BookViewTable extends JTable implements Serializable
                                                                i18n.getString("InvalidIntegerAgainMessage"),
                                                                i18n.getString("InvalidValueTitle"),
                                                               JOptionPane.INFORMATION_MESSAGE);
-                                JBookManagerFrame.library.getBookAt(row).setCount(lastVal);
+                                LibraryManager.library.getBookAt(row).setCount(lastVal);
                                 /**
                                  * At this state the non-integer (bad) value is in the table
                                  * and the good value is in the library, so just update the table data
                                  */
-                                updateData(JBookManagerFrame.library);
+                                updateData(LibraryManager.library);
                             }
                         }
                         break;
                     }
                     case 4: //Comment
                     {
-                        JBookManagerFrame.library.getBookAt(row).setComment(
+                        LibraryManager.library.getBookAt(row).setComment(
                                 (String) getValueAt(row, column));
                         break;
                     }

@@ -5,7 +5,10 @@
 package jbookmanager.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
+import jbookmanager.controller.OrderManager;
 
 /**
  *
@@ -13,8 +16,8 @@ import java.util.Vector;
  */
 public class Library implements Serializable
 {
-    private String name;
     private Vector<Book> books;
+    private OrderManager orderManager = new OrderManager();
 
     public Library()
     {
@@ -23,22 +26,22 @@ public class Library implements Serializable
 
     public void addBook(Book b)
     {
-        books.add(b);
+        getBooks().add(b);
     }
 
     public int getBookCount()
     {
-        return books.size();
+        return getBooks().size();
     }
 
     public Book getBookAt(int index)
     {
-        return books.elementAt(index);
+        return getBooks().elementAt(index);
     }
 
     public Book getBookByISBN(String isbn)
     {
-        for (Book b : books)
+        for (Book b : getBooks())
         {
             if (b.getIsbn().equals(isbn))
             {
@@ -50,7 +53,7 @@ public class Library implements Serializable
 
     public Book getBookByTitle(String title)
     {
-        for (Book b : books)
+        for (Book b : getBooks())
         {
             if (b.getTitle().equals(title))
             {
@@ -62,7 +65,7 @@ public class Library implements Serializable
 
     public void deleteBook(int index)
     {
-        books.remove(index);
+        getBooks().remove(index);
     }
 
     /**
@@ -74,7 +77,7 @@ public class Library implements Serializable
         Object[][] ret = new Object[getBookCount()][5];
         for (int i = 0; i < getBookCount(); i++)
         {
-            Book b = books.elementAt(i);
+            Book b = getBooks().elementAt(i);
             ret[i][0] = b.getIsbn();
             ret[i][1] = b.getTitle();
             ret[i][2] = b.getPrice();
@@ -84,20 +87,14 @@ public class Library implements Serializable
         return ret;
     }
 
-    /**
-     * @return the name
-     */
-    public String getName()
+    public List<String> getTitles()
     {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name)
-    {
-        this.name = name;
+        List<String> titles = new LinkedList<String>();
+        for(Book b : books)
+        {
+           titles.add(b.getTitle());
+        }
+        return titles;
     }
 
     /**
@@ -113,6 +110,22 @@ public class Library implements Serializable
      */
     public void setBooks(Vector<Book> books)
     {
-        this.books = books;
+        this.setBooks(books);
+    }
+    
+    /**
+     * @return the orders
+     */
+    public OrderManager getOrderManager()
+    {
+        return orderManager;
+    }
+
+    /**
+     * @param orders the orders to set
+     */
+    public void setOrderManager(OrderManager orders)
+    {
+        this.orderManager = orders;
     }
 }

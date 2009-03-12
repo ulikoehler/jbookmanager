@@ -23,6 +23,10 @@ import java.util.zip.GZIPOutputStream;
  */
 public abstract class LibraryManager
 {
+    /**
+     * This represents the library opened at this time
+     */
+    public static Library library = new Library();
 
     public static Library readLibrary(String file) throws FileNotFoundException
     {
