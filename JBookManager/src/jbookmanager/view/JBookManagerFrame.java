@@ -11,6 +11,7 @@
 package jbookmanager.view;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -63,7 +64,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
                 return "Library data files";
             }
         });
-        bookViewTable.repaint();
+
         initLibrary();
     }
 
@@ -72,25 +73,12 @@ public class JBookManagerFrame extends javax.swing.JFrame
         try
         {
             String libraryFilename = config.getProperty("LibraryFile");
-            if (!libraryFilename.isEmpty())
+            if ((!libraryFilename.isEmpty()) && (new File(libraryFilename).exists()))
             {
-                if (!(new File(libraryFilename).exists()))
-                {
-                    fc.showOpenDialog(this);
-                    libraryFilename = fc.getSelectedFile().getAbsolutePath();
-                }
                 library = LibraryManager.readLibrary(libraryFilename);
             }
             else //Create a new library
             {
-                fc.setDialogTitle(i18n.getString("Create new library"));
-                fc.showSaveDialog(this);
-                File libraryFile = fc.getSelectedFile();
-                if (!(libraryFile == null))
-                {
-                    config.setProperty("LibraryFile", libraryFile.getAbsolutePath());
-                }
-
                 library = new Library();
             }
         }
@@ -118,10 +106,10 @@ public class JBookManagerFrame extends javax.swing.JFrame
         filterStringField = new javax.swing.JTextField();
         filterOkButton = new javax.swing.JButton();
         filterDeleteButton = new javax.swing.JButton();
-        sizeBUtton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newLibraryMenuItem = new javax.swing.JMenuItem();
+        openMenuItem = new javax.swing.JMenuItem();
         saveLibraryMenuItem = new javax.swing.JMenuItem();
         saveCopyMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
@@ -164,14 +152,12 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
         filterDeleteButton.setText( i18n.getString("JBookManagerFrame.filterDeleteButton.text")); // NOI18N
 
-        sizeBUtton.setText( i18n.getString("JBookManagerFrame.sizeBUtton.text")); // NOI18N
-        sizeBUtton.addActionListener(new java.awt.event.ActionListener() {
+        fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
+        fileMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sizeBUttonActionPerformed(evt);
+                fileMenuActionPerformed(evt);
             }
         });
-
-        fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
 
         newLibraryMenuItem.setText( i18n.getString("JBookManagerFrame.newLibraryMenuItem.text")); // NOI18N
         newLibraryMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +166,10 @@ public class JBookManagerFrame extends javax.swing.JFrame
             }
         });
         fileMenu.add(newLibraryMenuItem);
+
+        openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        openMenuItem.setText( i18n.getString("JBookManagerFrame.openMenuItem.text")); // NOI18N
+        fileMenu.add(openMenuItem);
 
         saveLibraryMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         saveLibraryMenuItem.setText( i18n.getString("JBookManagerFrame.saveLibraryMenuItem.text")); // NOI18N
@@ -212,7 +202,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(newBookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,9 +217,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filterOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(filterDeleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addComponent(sizeBUtton)))
+                        .addComponent(filterDeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -243,8 +231,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
                     .addComponent(filterOkButton)
                     .addComponent(filterLabel)
                     .addComponent(newBookButton)
-                    .addComponent(filterDeleteButton)
-                    .addComponent(sizeBUtton))
+                    .addComponent(filterDeleteButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -301,10 +288,19 @@ public class JBookManagerFrame extends javax.swing.JFrame
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void sizeBUttonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sizeBUttonActionPerformed
-    {//GEN-HEADEREND:event_sizeBUttonActionPerformed
-        JOptionPane.showMessageDialog(this, library.getBookCount());
-    }//GEN-LAST:event_sizeBUttonActionPerformed
+    private void fileMenuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_fileMenuActionPerformed
+    {//GEN-HEADEREND:event_fileMenuActionPerformed
+        try
+        {
+            fc.showOpenDialog(this);
+            library =
+                    LibraryManager.readLibrary(fc.getSelectedFile().getAbsolutePath());
+        }
+        catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_fileMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,8 +334,8 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newBookButton;
     private javax.swing.JMenuItem newLibraryMenuItem;
+    private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveCopyMenuItem;
     private javax.swing.JMenuItem saveLibraryMenuItem;
-    private javax.swing.JButton sizeBUtton;
     // End of variables declaration//GEN-END:variables
 }

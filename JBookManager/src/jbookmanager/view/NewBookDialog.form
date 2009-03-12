@@ -28,29 +28,25 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="titleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="isbnLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="isbnFormattedField" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                          <Component id="titleField" alignment="0" pref="220" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Component id="okButton" alignment="0" pref="291" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="priceLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="commentLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="countLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="commentLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="commentScrollPane" pref="219" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="priceField" pref="219" max="32767" attributes="0"/>
-                          <Component id="commentField" alignment="0" pref="219" max="32767" attributes="0"/>
+                          <Component id="countLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="titleLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="isbnLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="priceLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="numberSpinner1" alignment="0" pref="219" max="32767" attributes="0"/>
+                          <Component id="titleField" alignment="1" pref="219" max="32767" attributes="0"/>
+                          <Component id="isbnFormattedField" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
+                          <Component id="priceField" alignment="0" pref="219" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -63,30 +59,30 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="isbnLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="isbnFormattedField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="isbnLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="titleLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="titleField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="priceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="priceField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="priceLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="commentLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="commentField" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="countLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="numberSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="countLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="commentLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="commentScrollPane" pref="149" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="okButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -136,8 +132,6 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="commentField">
-    </Component>
     <Component class="javax.swing.JButton" name="okButton">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
@@ -147,16 +141,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okButtonActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="priceField">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="###0.00 &#x20ac;" subtype="-1" type="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.priceField.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="countLabel">
       <Properties>
@@ -169,6 +153,24 @@
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="1" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="commentScrollPane">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="commentField">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="priceField">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.priceField.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
