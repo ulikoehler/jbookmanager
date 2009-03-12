@@ -84,8 +84,8 @@ public class BookViewTable extends JTable implements Serializable
                         catch (NumberFormatException ex)
                         {
                             String value = JOptionPane.showInputDialog(null,
-                                                                       i18n.getString(
-                                    "This value must be a floating-point integer. New value:"),
+                                                                       
+                                     i18n.getString("NoValidFPIMessage"),
                                                                        JBookManagerFrame.library.getBookAt(row).
                                     getPrice());
                             //Delocalize the input
@@ -102,9 +102,8 @@ public class BookViewTable extends JTable implements Serializable
                             catch (NumberFormatException ex2)
                             {
                                 JOptionPane.showMessageDialog(null,
-                                                              i18n.getString(
-                                        "Invalid floating-point integer. Setting price to previous value"),
-                                                              i18n.getString("Invalid value"),
+                                                               i18n.getString("NoValidFPIAgainMessage"),
+                                                               i18n.getString("InvalidValueTitle"),
                                                               JOptionPane.INFORMATION_MESSAGE);
                                 JBookManagerFrame.library.getBookAt(row).setPrice(lastVal);
                                 /**
@@ -134,8 +133,7 @@ public class BookViewTable extends JTable implements Serializable
                         {
                             String value =
                                     JOptionPane.showInputDialog(null,
-                                                                i18n.getString(
-                                    "This value must be an Integer. New value:"),
+                                                                 i18n.getString("InvalidIntegerMessage"),
                                                                 JBookManagerFrame.library.getBookAt(row).getCount());
                             //Delocalize the input
                             value = value.replace(',', '.');
@@ -151,9 +149,8 @@ public class BookViewTable extends JTable implements Serializable
                             catch (NumberFormatException ex2)
                             {
                                 JOptionPane.showMessageDialog(null,
-                                                              i18n.getString(
-                                        "Invalid Integer. Setting count to previous value."),
-                                                              i18n.getString("Invalid value"),
+                                                               i18n.getString("InvalidIntegerAgainMessage"),
+                                                               i18n.getString("InvalidValueTitle"),
                                                               JOptionPane.INFORMATION_MESSAGE);
                                 JBookManagerFrame.library.getBookAt(row).setCount(lastVal);
                                 /**
