@@ -38,11 +38,11 @@ public class Library {
         return null;
     }
 
-    public Book getBookByTitle(String isbn)
+    public Book getBookByTitle(String title)
     {
         for(Book b : books)
         {
-            if(b.getIsbn().equals(isbn))
+            if(b.getTitle().equals(title))
             {
                 return b;
             }

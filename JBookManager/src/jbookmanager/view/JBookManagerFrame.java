@@ -10,8 +10,15 @@
  */
 package jbookmanager.view;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import jbookmanager.model.JBookManagerConfiguration;
 import jbookmanager.model.Library;
+import jbookmanager.model.LibraryManager;
 
 /**
  *
@@ -24,6 +31,31 @@ public class JBookManagerFrame extends javax.swing.JFrame
     public JBookManagerFrame()
     {
         initComponents();
+        initLibrary();
+    }
+
+    private void initLibrary()
+    {
+        try
+        {
+            String libraryFilename = config.getProperty("LibraryFile");
+            if (!libraryFilename.isEmpty())
+            {
+                library = LibraryManager.readLibrary(libraryFilename);
+            }
+            else //Create a new library
+            {
+                fc.setDialogTitle( i18n.getString("Create new library"));
+                fc.showSaveDialog(this);
+                File libraryFile = fc.getSelectedFile();
+                config.setProperty("LibraryFile", libraryFile.getAbsolutePath());
+                library = new Library();
+            }
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -35,7 +67,49 @@ public class JBookManagerFrame extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        newLibraryMenuItem = new javax.swing.JMenuItem();
+        saveLibraryMenuItem = new javax.swing.JMenuItem();
+        saveCopyMenuItem = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
+
+        newLibraryMenuItem.setText( i18n.getString("JBookManagerFrame.newLibraryMenuItem.text")); // NOI18N
+        newLibraryMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newLibraryMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(newLibraryMenuItem);
+
+        saveLibraryMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        saveLibraryMenuItem.setText( i18n.getString("JBookManagerFrame.saveLibraryMenuItem.text")); // NOI18N
+        saveLibraryMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveLibraryMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(saveLibraryMenuItem);
+
+        saveCopyMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        saveCopyMenuItem.setText( i18n.getString("JBookManagerFrame.saveCopyMenuItem.text")); // NOI18N
+        saveCopyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveCopyMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(saveCopyMenuItem);
+
+        menuBar.add(fileMenu);
+
+        jMenu2.setText( i18n.getString("JBookManagerFrame.jMenu2.text")); // NOI18N
+        menuBar.add(jMenu2);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -45,11 +119,26 @@ public class JBookManagerFrame extends javax.swing.JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 273, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void saveCopyMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveCopyMenuItemActionPerformed
+    {//GEN-HEADEREND:event_saveCopyMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveCopyMenuItemActionPerformed
+
+    private void saveLibraryMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveLibraryMenuItemActionPerformed
+    {//GEN-HEADEREND:event_saveLibraryMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveLibraryMenuItemActionPerformed
+
+    private void newLibraryMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newLibraryMenuItemActionPerformed
+    {//GEN-HEADEREND:event_newLibraryMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newLibraryMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -65,8 +154,16 @@ public class JBookManagerFrame extends javax.swing.JFrame
             }
         });
     }
-    private Library mainLibrary;
+    private Library library;
+    private JFileChooser fc = new JFileChooser();
+    private JBookManagerConfiguration config = new JBookManagerConfiguration();
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem newLibraryMenuItem;
+    private javax.swing.JMenuItem saveCopyMenuItem;
+    private javax.swing.JMenuItem saveLibraryMenuItem;
     // End of variables declaration//GEN-END:variables
 }
