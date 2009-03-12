@@ -234,7 +234,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(newBookButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
