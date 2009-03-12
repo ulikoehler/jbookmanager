@@ -36,7 +36,10 @@ public class Library implements Serializable {
     public void updateTitleListModel(DefaultListModel model)
     {
         model.removeAllElements();
-        model.copyInto(getTitleList());
+        for(Book b : books)
+        {
+            model.addElement(b.getTitle());
+        }
     }
 
     public void addBook(Book b)
