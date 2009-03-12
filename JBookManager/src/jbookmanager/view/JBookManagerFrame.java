@@ -15,8 +15,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -54,7 +54,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
                 }
                 catch (IOException ex)
                 {
-                    Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.ERROR, null, ex);
                 }
                 return false; //File is not accessible so don't accept it
             }
@@ -87,7 +87,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
         }
         catch (IOException ex)
         {
-            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.ERROR, null, ex);
         }
     }
 
@@ -333,7 +333,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
         }
         catch (IOException ex)
         {
-            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.ERROR, null, ex);
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -380,7 +380,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
         }
         catch (FileNotFoundException ex)
         {
-            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.ERROR, null, ex);
         }
     }//GEN-LAST:event_openMenuItemActionPerformed
 

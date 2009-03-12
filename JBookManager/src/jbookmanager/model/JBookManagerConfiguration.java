@@ -9,8 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -42,7 +42,7 @@ public class JBookManagerConfiguration
         }
         catch (IOException ex)
         {
-            Logger.getLogger(JBookManagerConfiguration.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JBookManagerConfiguration.class.getName()).log(Level.ERROR, null, ex);
         }
         finally
         {
@@ -55,7 +55,7 @@ public class JBookManagerConfiguration
             }
             catch (IOException ex)
             {
-                Logger.getLogger(JBookManagerConfiguration.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JBookManagerConfiguration.class.getName()).log(Level.ERROR, null, ex);
             }
         }
 
@@ -83,7 +83,7 @@ public class JBookManagerConfiguration
         }
         catch (IOException ex)
         {
-            Logger.getLogger(JBookManagerConfiguration.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JBookManagerConfiguration.class.getName()).log(Level.ERROR, null, ex);
         }
     }
 

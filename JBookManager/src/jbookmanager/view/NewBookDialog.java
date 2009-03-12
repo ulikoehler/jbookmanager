@@ -12,8 +12,8 @@ package jbookmanager.view;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import javax.swing.JOptionPane;
 import jbookmanager.controller.LibraryManager;
 import jbookmanager.model.AmazonBookInfo;
@@ -209,7 +209,7 @@ public class NewBookDialog extends javax.swing.JDialog
         {
             JOptionPane.showMessageDialog(this, i18n.getString("IOErrorMessage"), i18n.getString("IOErrorTitle"),
                                           JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(NewBookDialog.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewBookDialog.class.getName()).log(Level.ERROR, null, ex);
         }
         /**
          * Occurs if no match has been found

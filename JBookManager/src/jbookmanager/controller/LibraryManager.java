@@ -13,10 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.NumberFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -24,6 +25,15 @@ import java.util.zip.GZIPOutputStream;
  */
 public abstract class LibraryManager
 {
+
+    /**
+     * Configures Log4J
+     */
+    static
+    {
+        PropertyConfigurator.configure(ClassLoader.getSystemResource("log4j.properties"));
+        logger = Logger.getLogger(LibraryManager.class);
+    }
 
     /**
      * This represents the library opened at this time
@@ -43,7 +53,7 @@ public abstract class LibraryManager
         }
         catch (IOException ex)
         {
-            Logger.getLogger(LibraryManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LibraryManager.class.getName()).log(Level.ERROR, null, ex);
         }
         finally
         {
@@ -53,7 +63,7 @@ public abstract class LibraryManager
             }
             catch (IOException ex)
             {
-                Logger.getLogger(LibraryManager.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LibraryManager.class.getName()).log(Level.ERROR, null, ex);
             }
         }
         return null;
@@ -71,7 +81,7 @@ public abstract class LibraryManager
         }
         catch (IOException ex)
         {
-            Logger.getLogger(LibraryManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LibraryManager.class.getName()).log(Level.ERROR, null, ex);
         }
         finally
         {
@@ -81,8 +91,10 @@ public abstract class LibraryManager
             }
             catch (IOException ex)
             {
-                Logger.getLogger(LibraryManager.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LibraryManager.class.getName()).log(Level.ERROR, null, ex);
             }
         }
     }
+
+    public static Logger logger;
 }
