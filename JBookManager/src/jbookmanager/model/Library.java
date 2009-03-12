@@ -16,6 +16,7 @@ import jbookmanager.controller.OrderManager;
  */
 public class Library implements Serializable
 {
+
     private Vector<Book> books;
     private OrderManager orderManager = new OrderManager();
 
@@ -90,9 +91,9 @@ public class Library implements Serializable
     public List<String> getTitles()
     {
         List<String> titles = new LinkedList<String>();
-        for(Book b : books)
+        for (Book b : books)
         {
-           titles.add(b.getTitle());
+            titles.add(b.getTitle());
         }
         return titles;
     }
@@ -112,7 +113,7 @@ public class Library implements Serializable
     {
         this.setBooks(books);
     }
-    
+
     /**
      * @return the orders
      */

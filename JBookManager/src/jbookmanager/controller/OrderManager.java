@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jbookmanager.controller;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import jbookmanager.model.*;
 import java.util.Vector;
 
@@ -15,6 +15,7 @@ import java.util.Vector;
  */
 public class OrderManager implements Serializable
 {
+
     private Vector<Order> orders;
 
     public OrderManager()
@@ -49,7 +50,7 @@ public class OrderManager implements Serializable
         {
             Order o = getOrders().elementAt(i);
             ret[i][0] = o.getName();
-            ret[i][1] = o.getPriceSum();
+            ret[i][1] = LibraryManager.currencyFormat.format(o.getPriceSum());
         }
         return ret;
     }

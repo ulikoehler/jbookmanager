@@ -9,9 +9,13 @@ public class AtomOrder
     private String bookTitle;
     private int count;
 
+    public AtomOrder()
+    {
+        
+    }
+
     public AtomOrder(String bookTitle, int count)
     {
-        super();
         this.bookTitle = bookTitle;
         this.count = count;
     }

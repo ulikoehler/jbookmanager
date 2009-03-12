@@ -35,26 +35,26 @@
                   </Group>
                   <Group type="102" alignment="0" max="-2" attributes="1">
                       <Component id="bookTitleScrollPane" pref="154" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="countLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="countSpinner" pref="121" max="32767" attributes="0"/>
+                              <Component id="countSpinner" min="-2" pref="121" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="deleteButton" alignment="0" pref="171" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Component id="deleteButton" alignment="0" max="32767" attributes="1"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="addButton" min="-2" pref="82" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="modifyButton" min="-2" pref="83" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="okButton" alignment="0" pref="171" max="32767" attributes="0"/>
+                          <Component id="okButton" alignment="0" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="suborderScrollPane" pref="168" max="32767" attributes="0"/>
+                      <Component id="suborderScrollPane" min="-2" pref="247" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,13 +67,6 @@
                   <Component id="nameField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="bookTitleScrollPane" alignment="0" pref="194" max="32767" attributes="2"/>
-                          <Component id="suborderScrollPane" alignment="0" min="0" pref="0" max="32767" attributes="2"/>
-                      </Group>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -89,6 +82,13 @@
                       <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="okButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="suborderScrollPane" alignment="0" min="0" pref="0" max="32767" attributes="2"/>
+                          <Component id="bookTitleScrollPane" alignment="0" pref="194" max="32767" attributes="2"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>

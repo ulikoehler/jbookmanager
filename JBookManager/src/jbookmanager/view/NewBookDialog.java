@@ -166,16 +166,22 @@ public class NewBookDialog extends javax.swing.JDialog
         String title = titleField.getText();
         if (title.isEmpty())
         {
-            JOptionPane.showMessageDialog(this,  i18n.getString("EmptyTitleErrorMessage"),  i18n.getString("EmptyTitleErrorTitle"),
+            JOptionPane.showMessageDialog(this, i18n.getString("EmptyTitleErrorMessage"), i18n.getString(
+                    "EmptyTitleErrorTitle"),
                                           JOptionPane.ERROR_MESSAGE);
             return;
         }
         b.setTitle(title);
         //Price
         String priceText = priceField.getText();
-        if(!priceText.isEmpty())
-        {b.setPrice(new Double(priceText.replace(',', '.')));}
-        else{b.setPrice(0.0);}
+        if (!priceText.isEmpty())
+        {
+            b.setPrice(new Double(priceText.replace(',', '.')));
+        }
+        else
+        {
+            b.setPrice(0.0);
+        }
         //Count
         b.setCount(countSpinner.getIntValue());
         //Comment
@@ -213,11 +219,10 @@ public class NewBookDialog extends javax.swing.JDialog
         {
             JOptionPane.showMessageDialog(this, i18n.getString("NoSuchBookErrorMessage"), i18n.getString(
                     "NoSuchBookErrorTitle"), JOptionPane.ERROR_MESSAGE);
-            //Don't log this error
+        //Don't log this error
         }
 
     }//GEN-LAST:event_amazonButtonActionPerformed
-
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton amazonButton;

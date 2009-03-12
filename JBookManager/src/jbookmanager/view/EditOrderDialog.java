@@ -8,7 +8,6 @@
  *
  * Created on 02.03.2009, 15:43:08
  */
-
 package jbookmanager.view;
 
 import java.util.ResourceBundle;
@@ -22,21 +21,24 @@ import jbookmanager.model.Order;
  *
  * @author uli
  */
-public class EditOrderDialog extends javax.swing.JDialog {
+public class EditOrderDialog extends javax.swing.JDialog
+{
 
     /**
      * Creates new form EditOrderDialog
      * @param parent
      * @param modal 
      */
-    public EditOrderDialog(java.awt.Frame parent, boolean modal) {
+    public EditOrderDialog(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
         //Init the book title list
         updateBookTitleList();
     }
 
-    public EditOrderDialog(java.awt.Frame parent, boolean modal, Order order) {
+    public EditOrderDialog(java.awt.Frame parent, boolean modal, Order order)
+    {
         super(parent, modal);
         this.assocOrder = order;
         initComponents();
@@ -49,11 +51,11 @@ public class EditOrderDialog extends javax.swing.JDialog {
 
     public void updateBookTitleList()
     {
-        ((DefaultListModel)bookTitleList.getModel()).removeAllElements();
-        for(String s : LibraryManager.library.getTitles())
+        ((DefaultListModel) bookTitleList.getModel()).removeAllElements();
+        for (String s : LibraryManager.library.getTitles())
         {
-            ((DefaultListModel)bookTitleList.getModel()).addElement(s);
-        }        
+            ((DefaultListModel) bookTitleList.getModel()).addElement(s);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -133,20 +135,20 @@ public class EditOrderDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(bookTitleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(countLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(countSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
-                            .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(countSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(modifyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                            .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(suborderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(suborderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,11 +158,6 @@ public class EditOrderDialog extends javax.swing.JDialog {
                     .addComponent(nameLabel)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bookTitleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                            .addComponent(suborderScrollPane, 0, 0, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -173,7 +170,12 @@ public class EditOrderDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
                         .addGap(27, 27, 27)
-                        .addComponent(okButton)))
+                        .addComponent(okButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(suborderScrollPane, 0, 0, Short.MAX_VALUE)
+                            .addComponent(bookTitleScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -190,7 +192,7 @@ public class EditOrderDialog extends javax.swing.JDialog {
 
     private void updateSuborderTable()
     {
-        ((DefaultTableModel)suborderTable.getModel()).setDataVector(getAssocOrder().getDataVector(), columnNames);
+        ((DefaultTableModel) suborderTable.getModel()).setDataVector(getAssocOrder().getDataVector(), columnNames);
     }
 
     private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modifyButtonActionPerformed
@@ -211,13 +213,15 @@ public class EditOrderDialog extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {//GEN-HEADEREND:event_okButtonActionPerformed
         //Set the name of the order
-       assocOrder.setName(nameField.getText());
-       this.dispose();
+        assocOrder.setName(nameField.getText());
+        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
-
     private Order assocOrder = new Order();
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
-    private static final String[] columnNames = {"Book", "Count"};
+    private static final String[] columnNames =
+    {
+        "Book", "Count", "Sum"
+    };
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JList bookTitleList;
@@ -248,5 +252,4 @@ public class EditOrderDialog extends javax.swing.JDialog {
     {
         this.assocOrder = assocOrder;
     }
-
 }

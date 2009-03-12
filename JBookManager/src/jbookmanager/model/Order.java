@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jbookmanager.model;
 
 import java.io.Serializable;
@@ -71,25 +70,30 @@ public class Order implements Serializable
     public double getPriceSum()
     {
         double sum = 0.0;
-        for(AtomOrder a : getData())
+        for (AtomOrder a : getData())
         {
             sum += a.getCount() * LibraryManager.library.getBookByTitle(a.getBookTitle()).getPrice();
         }
         return sum;
     }
 
+    /**
+     * Generates a 2-dimensional array of the data hold by this objet
+     * @return The data array
+     */
     public Object[][] getDataVector()
     {
-        Object[][] ret = new Object[getData().size()][2];
+        Object[][] ret = new Object[getData().size()][3];
         for (int i = 0; i < getData().size(); i++)
         {
             AtomOrder a = getData().elementAt(i);
             ret[i][0] = a.getBookTitle();
             ret[i][1] = a.getCount();
+            ret[i][2] = LibraryManager.currencyFormat.format(a.getCount() * LibraryManager.library.getBookByTitle(a.
+                    getBookTitle()).getPrice());
         }
         return ret;
     }
-
     private String name;
     private Vector<AtomOrder> data;
 }

@@ -393,7 +393,8 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private void editOrdersMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOrdersMenuItemActionPerformed
     {//GEN-HEADEREND:event_editOrdersMenuItemActionPerformed
         final OrderManagerFrame mf = new OrderManagerFrame();
-        SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable()
+        {
 
             public void run()
             {
@@ -416,7 +417,6 @@ public class JBookManagerFrame extends javax.swing.JFrame
             }
         });
     }
-
     private JFileChooser fc = new JFileChooser();
     private JBookManagerConfiguration config = new JBookManagerConfiguration();
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
