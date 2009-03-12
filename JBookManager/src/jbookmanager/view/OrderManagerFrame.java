@@ -8,30 +8,32 @@
  *
  * Created on 02.03.2009, 15:05:50
  */
-
 package jbookmanager.view;
 
 import java.util.ResourceBundle;
 import jbookmanager.controller.LibraryManager;
 import jbookmanager.controller.StaticTableModel;
 import jbookmanager.controller.OrderManager;
+import jbookmanager.model.Order;
 
 /**
  *
  * @author uli
  */
-public class OrderManagerFrame extends javax.swing.JFrame {
+public class OrderManagerFrame extends javax.swing.JFrame
+{
 
     /** Creates new form OrderManagerFrame */
-    public OrderManagerFrame() {
+    public OrderManagerFrame()
+    {
         initComponents();
 
-        updateData(LibraryManager.library.getOrderManager());        
+        updateData(LibraryManager.library.getOrderManager());
     }
 
     public void updateData(OrderManager manager)
     {
-       ((StaticTableModel)orderViewTable.getModel()).setDataVector(manager.getOrders(), tableColumnNames);
+        ((StaticTableModel) orderViewTable.getModel()).setDataVector(manager.getOrders(), tableColumnNames);
     }
 
     /**
@@ -109,24 +111,31 @@ public class OrderManagerFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void deleteOrderButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteOrderButtonActionPerformed
     {//GEN-HEADEREND:event_deleteOrderButtonActionPerformed
-        // TODO add your handling code here:
+        int index = orderViewTable.getSelectedRow();
+        LibraryManager.library.getOrderManager().removeOrder(index);
     }//GEN-LAST:event_deleteOrderButtonActionPerformed
 
     private void newOrderButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newOrderButtonActionPerformed
     {//GEN-HEADEREND:event_newOrderButtonActionPerformed
         EditOrderDialog dialog = new EditOrderDialog(this, true);
-                dialog.setVisible(true);
+        dialog.setVisible(true);
+        LibraryManager.library.getOrderManager().addOrder(dialog.getAssocOrder());
     }//GEN-LAST:event_newOrderButtonActionPerformed
 
     private void editOrderButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOrderButtonActionPerformed
     {//GEN-HEADEREND:event_editOrderButtonActionPerformed
-        // TODO add your handling code here:
+        int index = orderViewTable.getSelectedRow();
+        Order order = LibraryManager.library.getOrderManager().getOrderAt(index);
+        EditOrderDialog dialog = new EditOrderDialog(this, true, order);
+        dialog.setVisible(true);
+        LibraryManager.library.getOrderManager().setOrderAt(dialog.getAssocOrder(), index);
     }//GEN-LAST:event_editOrderButtonActionPerformed
-
-    private static final String[] tableColumnNames = {"Name", "Sum"};
+    private static final String[] tableColumnNames =
+    {
+        "Name", "Sum"
+    };
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteOrderButton;
@@ -135,5 +144,4 @@ public class OrderManagerFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane orderViewScrollPane;
     private javax.swing.JTable orderViewTable;
     // End of variables declaration//GEN-END:variables
-
 }

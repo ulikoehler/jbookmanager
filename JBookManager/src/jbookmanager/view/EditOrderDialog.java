@@ -37,6 +37,14 @@ public class EditOrderDialog extends javax.swing.JDialog {
         updateBookTitleList();
     }
 
+    public EditOrderDialog(java.awt.Frame parent, boolean modal, Order order) {
+        super(parent, modal);
+        this.assocOrder = order;
+        initComponents();
+        //Init the book title list
+        updateBookTitleList();
+    }
+
     public void updateBookTitleList()
     {
         ((DefaultListModel)bookTitleList.getModel()).removeAllElements();
@@ -168,13 +176,13 @@ public class EditOrderDialog extends javax.swing.JDialog {
     {//GEN-HEADEREND:event_addButtonActionPerformed
         String bookTitle = (String) bookTitleList.getSelectedValue();
         int count = countSpinner.getIntValue();
-        assocOrder.addOrder(bookTitle, count);
+        getAssocOrder().addOrder(bookTitle, count);
         updateTable();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateTable()
     {
-        ((DefaultTableModel)suborderTable.getModel()).setDataVector(assocOrder.getData(), columnNames);
+        ((DefaultTableModel)suborderTable.getModel()).setDataVector(getAssocOrder().getData(), columnNames);
     }
 
     private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modifyButtonActionPerformed
@@ -185,14 +193,14 @@ public class EditOrderDialog extends javax.swing.JDialog {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
     {//GEN-HEADEREND:event_deleteButtonActionPerformed
         int row = suborderTable.getSelectedRow();
-        assocOrder.deleteOrder(row);
+        getAssocOrder().deleteOrder(row);
         updateTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
     {//GEN-HEADEREND:event_formWindowClosing
        //Set the name of the order
-        assocOrder.setName(nameField.getText());
+        getAssocOrder().setName(nameField.getText());
     }//GEN-LAST:event_formWindowClosing
 
     private Order assocOrder = new Order();
@@ -211,5 +219,21 @@ public class EditOrderDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane suborderScrollPane;
     private javax.swing.JTable suborderTable;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the assocOrder
+     */
+    public Order getAssocOrder()
+    {
+        return assocOrder;
+    }
+
+    /**
+     * @param assocOrder the assocOrder to set
+     */
+    public void setAssocOrder(Order assocOrder)
+    {
+        this.assocOrder = assocOrder;
+    }
 
 }

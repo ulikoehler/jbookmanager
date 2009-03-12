@@ -5,6 +5,7 @@
 
 package jbookmanager.controller;
 
+import java.io.Serializable;
 import jbookmanager.model.*;
 import java.util.Vector;
 
@@ -12,7 +13,7 @@ import java.util.Vector;
  *
  * @author uli
  */
-public class OrderManager
+public class OrderManager implements Serializable
 {
     public Vector<Order> orders;
 
@@ -29,6 +30,16 @@ public class OrderManager
     public void removeOrder(int index)
     {
         orders.remove(index);
+    }
+
+    public Order getOrderAt(int index)
+    {
+        return orders.elementAt(index);
+    }
+
+    public void setOrderAt(Order order, int index)
+    {
+        orders.set(index, order);
     }
 
     public Object[][] getOrders()
