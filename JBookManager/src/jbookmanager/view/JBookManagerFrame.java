@@ -16,9 +16,12 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
 import jbookmanager.model.JBookManagerConfiguration;
 import jbookmanager.model.Library;
-import jbookmanager.model.LibraryManager;
+import jbookmanager.controller.LibraryManager;
+import jbookmanager.controller.LibraryTableModel;
 
 /**
  *
@@ -31,6 +34,28 @@ public class JBookManagerFrame extends javax.swing.JFrame
     public JBookManagerFrame()
     {
         initComponents();
+        fc.setFileFilter(new FileFilter() {
+
+            @Override
+            public boolean accept(File f)
+            {
+                try
+                {
+                    return f.getCanonicalPath().endsWith(".lgz");
+                }
+                catch (IOException ex)
+                {
+                    Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return false; //File is not accessible so don't accept it
+            }
+
+            @Override
+            public String getDescription()
+            {
+                return "Library data files";
+            }
+        });
         initLibrary();
     }
 
@@ -45,7 +70,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
             }
             else //Create a new library
             {
-                fc.setDialogTitle( i18n.getString("Create new library"));
+                fc.setDialogTitle(i18n.getString("Create new library"));
                 fc.showSaveDialog(this);
                 File libraryFile = fc.getSelectedFile();
                 config.setProperty("LibraryFile", libraryFile.getAbsolutePath());
@@ -67,14 +92,19 @@ public class JBookManagerFrame extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newLibraryMenuItem = new javax.swing.JMenuItem();
         saveLibraryMenuItem = new javax.swing.JMenuItem();
         saveCopyMenuItem = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        editMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTable1.setModel(new LibraryTableModel(library));
+        jScrollPane1.setViewportView(jTable1);
 
         fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
 
@@ -106,8 +136,8 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
         menuBar.add(fileMenu);
 
-        jMenu2.setText( i18n.getString("JBookManagerFrame.jMenu2.text")); // NOI18N
-        menuBar.add(jMenu2);
+        editMenu.setText( i18n.getString("JBookManagerFrame.editMenu.text")); // NOI18N
+        menuBar.add(editMenu);
 
         setJMenuBar(menuBar);
 
@@ -115,11 +145,17 @@ public class JBookManagerFrame extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -127,17 +163,30 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
     private void saveCopyMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveCopyMenuItemActionPerformed
     {//GEN-HEADEREND:event_saveCopyMenuItemActionPerformed
-        // TODO add your handling code here:
+        fc.setDialogTitle(i18n.getString("Save copy"));
+        fc.showSaveDialog(this);
+        String filename = fc.getSelectedFile().getAbsolutePath();
+        LibraryManager.writeLibrary(library, filename);
     }//GEN-LAST:event_saveCopyMenuItemActionPerformed
 
     private void saveLibraryMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveLibraryMenuItemActionPerformed
     {//GEN-HEADEREND:event_saveLibraryMenuItemActionPerformed
-        // TODO add your handling code here:
+        LibraryManager.writeLibrary(library, config.getProperty("LibraryFile"));
     }//GEN-LAST:event_saveLibraryMenuItemActionPerformed
 
     private void newLibraryMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newLibraryMenuItemActionPerformed
     {//GEN-HEADEREND:event_newLibraryMenuItemActionPerformed
-        // TODO add your handling code here:
+        int sel = JOptionPane.showConfirmDialog(this,
+                                                i18n.getString("Save the current library?"),
+                                                "Save current library",
+                                                JOptionPane.YES_NO_OPTION,
+                                                JOptionPane.QUESTION_MESSAGE);
+        //Save the library if the user clicked "Yes"
+        if(sel == JOptionPane.YES_OPTION)
+        {
+            LibraryManager.writeLibrary(library, config.getProperty("LibraryFile"));
+        }
+        library = new Library();
     }//GEN-LAST:event_newLibraryMenuItemActionPerformed
 
     /**
@@ -159,8 +208,10 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private JBookManagerConfiguration config = new JBookManagerConfiguration();
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem newLibraryMenuItem;
     private javax.swing.JMenuItem saveCopyMenuItem;

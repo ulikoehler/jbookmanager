@@ -74,8 +74,6 @@ public class NewBookDialog extends javax.swing.JDialog
 
         commentLabel.setText( i18n.getString("NewBookDialog.commentLabel.text")); // NOI18N
 
-        commentField.setText( i18n.getString("NewBookDialog.commentField.text")); // NOI18N
-
         okButton.setText( i18n.getString("NewBookDialog.okButton.text")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,10 +149,6 @@ public class NewBookDialog extends javax.swing.JDialog
         b.setTitle(title);
         //Authors
         List<String> authors = new LinkedList<String>();
-        for (int i = 0; i < authorsComboBox.getItemCount(); i++)
-        {
-            authors.add((String) authorsComboBox.getItemAt(i));
-        }
         b.setAuthors(authors);
         //Comment
         b.setComment(commentField.getText());

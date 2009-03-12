@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class Book
 {
-    private String name;
     private String isbn;
     private String title;
     private List<String> authors;
@@ -20,23 +19,7 @@ public class Book
     //Optional info
     private double price;
     private int count;
-
-    /**
-     * @return the name
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
+    
     /**
      * @return the isbn
      */

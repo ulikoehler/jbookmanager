@@ -135,11 +135,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="commentField">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.commentField.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="okButton">
       <Properties>

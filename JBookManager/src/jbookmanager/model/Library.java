@@ -7,6 +7,7 @@ package jbookmanager.model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -14,16 +15,21 @@ import java.util.List;
  */
 public class Library {
     private String name;
-    private List<Book> books;
+    private Vector<Book> books;
 
     public Library()
     {
-        books = new LinkedList<Book>();
+        books = new Vector<Book>();
     }
 
     public void addBook(Book b)
     {
         books.add(b);
+    }
+
+    public Book getBookAt(int index)
+    {
+        return books.elementAt(index);
     }
 
     public Book getBookByISBN(String isbn)
@@ -69,7 +75,7 @@ public class Library {
     /**
      * @return the books
      */
-    public List<Book> getBooks()
+    public Vector<Book> getBooks()
     {
         return books;
     }
@@ -77,7 +83,7 @@ public class Library {
     /**
      * @param books the books to set
      */
-    public void setBooks(List<Book> books)
+    public void setBooks(Vector<Book> books)
     {
         this.books = books;
     }
