@@ -10,7 +10,7 @@ package jbookmanager.controller;
  * @author uli
  */
 
-import javax.swing.JComboBox;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import jbookmanager.model.Library;
 
@@ -36,12 +36,27 @@ public class LibraryTableModel extends AbstractTableModel
         {
             case 0: return String.class; //ISBN
             case 1: return String.class; //Title
-            case 2: return JComboBox.class; //Authors //TODO Add own panel class for this
+            case 2: return String.class; //Authors //TODO Add own panel class for this
             case 3: return double.class; //Price
             case 4: return int.class; //Count
             case 5: return String.class; //Comment
             default: throw new IllegalArgumentException("Illegal column index: " + columnIndex);
         }
+    }
+
+    /**
+     * Generates a semicolon-separated list of the list elements
+     * @param data the list to be converted
+     * @return a semicolon-separated list of the list elements
+     */
+    private String listOverview(List<String> data)
+    {
+        String ret = "";
+        for(String s : data)
+        {
+            ret += s + ";";
+        }
+        return ret;
     }
 
     @Override
@@ -59,7 +74,7 @@ public class LibraryTableModel extends AbstractTableModel
             }
             case 2: //Authors
             {
-                
+                return listOverview(library.getBookAt(row).getAuthors());
             }
             case 3: //Price
             {
@@ -73,7 +88,6 @@ public class LibraryTableModel extends AbstractTableModel
             {
                 return library.getBookAt(row).getComment();
             }
-
             default: return null;
         }
         //return null;
