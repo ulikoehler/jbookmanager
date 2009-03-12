@@ -5,7 +5,8 @@
 
 /*
  * JBookManagerFrame.java
- *
+ * Main GUI frame for JBookManager
+ * Has to be used as singleton!
  * Created on 26.02.2009, 19:37:49
  */
 package jbookmanager.view;
@@ -290,6 +291,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
             LibraryManager.writeLibrary(library, config.getProperty("LibraryFile"));
         }
         library = new Library();
+        bookViewTable.updateData(library);
     }//GEN-LAST:event_newLibraryMenuItemActionPerformed
 
     private void newBookButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newBookButtonActionPerformed

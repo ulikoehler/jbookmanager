@@ -61,7 +61,7 @@ public class NewBookDialog extends javax.swing.JDialog
         isbnLabel.setText( i18n.getString("NewBookDialog.isbnLabel.text")); // NOI18N
 
         try {
-            isbnFormattedField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-##########")));
+            isbnFormattedField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

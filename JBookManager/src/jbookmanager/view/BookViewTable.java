@@ -11,8 +11,12 @@
 package jbookmanager.view;
 
 import java.io.Serializable;
+import java.util.ResourceBundle;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import jbookmanager.model.Library;
@@ -28,14 +32,120 @@ public class BookViewTable extends JTable implements Serializable
     public BookViewTable()
     {
         initComponents();
+        setLibrary(new Library()); //Initialize with an empty library
     }
 
     public void setLibrary(Library library)
     {
         DefaultTableModel model = new DefaultTableModel(library.getData(), columnNames);
         setModel(model);
+        //Active the row sorter (also filterer)
         sorter = new TableRowSorter<DefaultTableModel>(model);
         setRowSorter(sorter);
+        //Add a table listener
+        getModel().addTableModelListener(new TableModelListener() {
+
+            public void tableChanged(TableModelEvent e)
+            {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
+                switch (column)
+                {
+                    case 0: //ISBN
+                    {
+                        JBookManagerFrame.library.getBookAt(row).setIsbn((String) getValueAt(row, column));
+                        break;
+                    }
+                    case 1: //Title
+                    {
+                        JBookManagerFrame.library.getBookAt(row).setTitle(
+                                (String) getValueAt(row, column));
+                        break;
+                    }
+                    /**
+                     * If the number entered by the user is not a valid double,
+                     * a input dialog is displayed to enter a valid value.
+                     * If this value is invalid (as double) too,
+                     * the value is set to the previous one and
+                     * an information message is displayed.
+                     */
+                    case 2: //Price
+                    {
+                        double prevVal = JBookManagerFrame.library.
+                                                                        getBookAt(row).
+                                getPrice();
+                        try
+                        {
+                            JBookManagerFrame.library.getBookAt(row).setPrice(new Double((String) getValueAt(
+                                    row, column)));
+                        }
+                        catch (NumberFormatException ex)
+                        {
+                            String value = JOptionPane.showInputDialog(null,
+                                                                       i18n.getString(
+                                    "This value must be a floating-point integer. New value:"),
+                                                                       JBookManagerFrame.library.
+                                    getBookAt(row).
+                                    getPrice());
+                            try
+                            {
+                                double doubleValue = new Double(value);
+                                JBookManagerFrame.library.getBookAt(row).setPrice(doubleValue);
+                            }
+                            catch (NumberFormatException ex2)
+                            {
+                                JOptionPane.showMessageDialog(null,
+                                                              i18n.getString(
+                                        "Invalid floating-point integer. Setting price to previous value"),
+                                                              i18n.getString("Invalid value"),
+                                                              JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+                        break;
+                    }
+                    /**
+                     * See price column (above) for explanation
+                     */
+                    case 3: //Count
+                    {
+                        int prevVal = JBookManagerFrame.library.
+                                                                        getBookAt(row).
+                                getCount();
+                        try
+                        {
+                            JBookManagerFrame.library.getBookAt(row).setCount(new Integer((String) getValueAt(
+                                    row, column)));
+                        }
+                        catch (NumberFormatException ex)
+                        {
+                            String value = JOptionPane.showInputDialog(null,
+                                                                        i18n.getString("This value must be an Integer. New value:"),
+                                                                       JBookManagerFrame.library.
+                                    getBookAt(row).
+                                    getPrice());
+                            try
+                            {
+                                int intValue = new Integer(value);
+                                JBookManagerFrame.library.getBookAt(row).setPrice(intValue);
+                            }
+                            catch (NumberFormatException ex2)
+                            {
+                                JOptionPane.showMessageDialog(null,
+                                                                i18n.getString("Invalid Integer. Setting count to previous value."),
+                                                              i18n.getString("Invalid value"),
+                                                              JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+                        break;
+                    }
+                    case 4: //Comment
+                    {
+                        JBookManagerFrame.library.getBookAt(row).setComment((String) getValueAt(row, column));
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     public void containsFilter(String substr, int... column)
@@ -95,6 +205,7 @@ public class BookViewTable extends JTable implements Serializable
     {
         "ISBN", "Title", "Price", "Count", "Comment"
     };
+    private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     //Column specifiers
     public static final int ISBN_COLUMN = 0;
     public static final int TITLE_COLUMN = 1;
