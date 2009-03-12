@@ -213,7 +213,7 @@ public class NewBookDialog extends javax.swing.JDialog
         {
             JOptionPane.showMessageDialog(this, i18n.getString("NoSuchBookErrorMessage"), i18n.getString(
                     "NoSuchBookErrorTitle"), JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(NewBookDialog.class.getName()).log(Level.SEVERE, null, ex);
+            //Don't log this error
         }
 
     }//GEN-LAST:event_amazonButtonActionPerformed

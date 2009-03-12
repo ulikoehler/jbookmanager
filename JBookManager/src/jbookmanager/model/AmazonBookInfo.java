@@ -21,7 +21,7 @@ import org.apache.commons.httpclient.params.HttpMethodParams;
 public class AmazonBookInfo
 {
         
-    public static Book getBookInfo(String isbn) throws IOException
+    public static Book getBookInfo(String isbn) throws IOException, IllegalStateException
     {
         HttpClient client = new HttpClient();
 

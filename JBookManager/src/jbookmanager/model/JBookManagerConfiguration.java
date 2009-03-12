@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class JBookManagerConfiguration
 {
 
-    private static final String configFilename = "/ram/.jbookmanager";
+    private static final String configFilename = "~/.jbookmanager";
     private Properties props;
 
     public JBookManagerConfiguration()

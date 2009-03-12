@@ -122,6 +122,7 @@ public class OrderManagerFrame extends javax.swing.JFrame
         EditOrderDialog dialog = new EditOrderDialog(this, true);
         dialog.setVisible(true);
         LibraryManager.library.getOrderManager().addOrder(dialog.getAssocOrder());
+        updateData(manager);
     }//GEN-LAST:event_newOrderButtonActionPerformed
 
     private void editOrderButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOrderButtonActionPerformed
