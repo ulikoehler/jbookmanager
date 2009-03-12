@@ -34,6 +34,13 @@ public class Book implements Serializable
      */
     public void setIsbn(String isbn)
     {
+        /**
+         * Log the change
+         */
+        if(logger.isInfoEnabled())
+        {
+            logger.info("Changed ISBN of book '" + title + "' from '" + this.isbn + "' to '" + isbn + "'");
+        }
         this.isbn = isbn;
     }
 
@@ -50,6 +57,13 @@ public class Book implements Serializable
      */
     public void setTitle(String title)
     {
+        /**
+         * Log the change
+         */
+        if(logger.isInfoEnabled())
+        {
+            logger.info("Changed book title from '" + this.title + "' to '" + title + "'");
+        }
         this.title = title;
     }
 
