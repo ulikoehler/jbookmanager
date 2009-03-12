@@ -66,7 +66,7 @@ public class Book implements Serializable
      */
     public void setAuthors(List<String> authors)
     {
-        this.setAuthors(authors);
+        this.authors = authors;
     }
 
     /**

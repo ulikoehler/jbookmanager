@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import jbookmanager.model.Book;
+import jbookmanager.model.Library;
 
 /**
  *
@@ -32,6 +33,11 @@ public class NewBookDialog extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
+    }
+
+    public void setLibrary(Library library)
+    {
+        this.library = library;
     }
 
     /** This method is called from within the constructor to
@@ -153,6 +159,8 @@ public class NewBookDialog extends javax.swing.JDialog
         //Comment
         b.setComment(commentField.getText());
 
+        library.addBook(b);
+
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
@@ -179,6 +187,7 @@ public class NewBookDialog extends javax.swing.JDialog
             }
         });
     }
+    private Library library;
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField authorsField;

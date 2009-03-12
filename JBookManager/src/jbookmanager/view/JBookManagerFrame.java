@@ -34,6 +34,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
     {
         initComponents();
         bookViewTable.setLibrary(library);
+        
         fc.setFileFilter(new FileFilter() {
 
             @Override
@@ -57,6 +58,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
                 return "Library data files";
             }
         });
+        
         initLibrary();
     }
 
@@ -74,7 +76,6 @@ public class JBookManagerFrame extends javax.swing.JFrame
                 fc.setDialogTitle(i18n.getString("Create new library"));
                 fc.showSaveDialog(this);
                 File libraryFile = fc.getSelectedFile();
-                fc.setDialogType(JFileChooser.SAVE_DIALOG);
                 if(!(libraryFile == null))
                 {config.setProperty("LibraryFile", libraryFile.getAbsolutePath());}
                 library = new Library();
@@ -113,6 +114,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle( i18n.getString("JBookManagerFrame.title")); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         bookViewTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,11 +191,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(newBookButton)
-                        .addGap(53, 53, 53)
+                        .addComponent(newBookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(filterLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filterColumnComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,7 +204,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filterStringField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(filterOkButton)
+                        .addComponent(filterOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filterDeleteButton)))
                 .addContainerGap())
@@ -206,15 +212,16 @@ public class JBookManagerFrame extends javax.swing.JFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newBookButton)
-                    .addComponent(filterLabel)
-                    .addComponent(filterColumnComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterColumnComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterStringField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterOkButton)
+                    .addComponent(filterLabel)
+                    .addComponent(newBookButton)
                     .addComponent(filterDeleteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -253,8 +260,21 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private void newBookButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newBookButtonActionPerformed
     {//GEN-HEADEREND:event_newBookButtonActionPerformed
         NewBookDialog newBookDialog = new NewBookDialog(this, true);
+        newBookDialog.setLibrary(library);
         newBookDialog.setVisible(true);
     }//GEN-LAST:event_newBookButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        try
+        {
+            config.save();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

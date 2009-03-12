@@ -8,8 +8,6 @@ package jbookmanager.controller;
  *
  * @author uli
  */
-import java.util.List;
-import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
@@ -27,7 +25,7 @@ public class LibraryTableModel extends AbstractTableModel
     public LibraryTableModel(Library library)
     {
         this.library = library;
-
+        addListener();
     }
 
     private void addListener()

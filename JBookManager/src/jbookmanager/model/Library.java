@@ -7,6 +7,8 @@ package jbookmanager.model;
 
 import java.io.Serializable;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,6 +26,7 @@ public class Library implements Serializable {
     public void addBook(Book b)
     {
         books.add(b);
+        Logger.getLogger(JBookManagerConfiguration.class.getName()).log(Level.SEVERE, "Added book", "Added book");
     }
 
     public Book getBookAt(int index)
