@@ -119,6 +119,8 @@ public class JBookManagerFrame extends javax.swing.JFrame
         saveCopyMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         editOrdersMenuItem = new javax.swing.JMenuItem();
+        logMenu = new javax.swing.JMenu();
+        viewLogMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle( i18n.getString("JBookManagerFrame.title")); // NOI18N
@@ -225,6 +227,19 @@ public class JBookManagerFrame extends javax.swing.JFrame
         editMenu.add(editOrdersMenuItem);
 
         menuBar.add(editMenu);
+
+        logMenu.setText( i18n.getString("JBookManagerFrame.logMenu.text")); // NOI18N
+
+        viewLogMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        viewLogMenuItem.setText( i18n.getString("JBookManagerFrame.viewLogMenuItem.text")); // NOI18N
+        viewLogMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewLogMenuItemActionPerformed(evt);
+            }
+        });
+        logMenu.add(viewLogMenuItem);
+
+        menuBar.add(logMenu);
 
         setJMenuBar(menuBar);
 
@@ -404,6 +419,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
         });
     }//GEN-LAST:event_editOrdersMenuItemActionPerformed
 
+    private void viewLogMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_viewLogMenuItemActionPerformed
+    {//GEN-HEADEREND:event_viewLogMenuItemActionPerformed
+        new LogViewerFrame().setVisible(true);
+    }//GEN-LAST:event_viewLogMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -434,11 +454,13 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private javax.swing.JTextField filterStringField;
     private javax.swing.JComboBox filterTypeComboBox;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu logMenu;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newBookButton;
     private javax.swing.JMenuItem newLibraryMenuItem;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem saveCopyMenuItem;
     private javax.swing.JMenuItem saveLibraryMenuItem;
+    private javax.swing.JMenuItem viewLogMenuItem;
     // End of variables declaration//GEN-END:variables
 }

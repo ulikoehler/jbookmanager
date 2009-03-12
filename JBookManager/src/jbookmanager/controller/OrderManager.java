@@ -5,7 +5,6 @@
 package jbookmanager.controller;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import jbookmanager.model.*;
 import java.util.Vector;
 
