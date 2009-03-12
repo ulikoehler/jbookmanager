@@ -286,9 +286,8 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private void newBookButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newBookButtonActionPerformed
     {//GEN-HEADEREND:event_newBookButtonActionPerformed
         NewBookDialog newBookDialog = new NewBookDialog(this, true);
-        newBookDialog.setLibrary(library);
         newBookDialog.setVisible(true);
-        ((LibraryTableModel) bookViewTable.getModel()).update();
+        bookViewTable.bookInserted();
     }//GEN-LAST:event_newBookButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing

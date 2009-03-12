@@ -33,11 +33,6 @@ public class NewBookDialog extends javax.swing.JDialog
         initComponents();
     }
 
-    public void setLibrary(Library library)
-    {
-        this.library = library;
-    }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -171,11 +166,12 @@ public class NewBookDialog extends javax.swing.JDialog
         //Comment
         b.setComment(commentField.getText());
 
-        library.addBook(b);
+        /**
+         * Add the book to the library
+         */
+        JBookManagerFrame.library.addBook(b);
 
-
-        this.setVisible(false);
-
+        this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
