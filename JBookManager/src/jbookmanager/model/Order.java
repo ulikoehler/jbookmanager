@@ -7,6 +7,7 @@ package jbookmanager.model;
 
 import java.io.Serializable;
 import java.util.Vector;
+import jbookmanager.controller.LibraryManager;
 
 /**
  *
@@ -36,24 +37,23 @@ public class Order implements Serializable
      */
     class AtomOrder
     {
-        public Book b;
+        public String bookTitle;
         public int count;
-        public AtomOrder(Book b, int count)
+        public AtomOrder(String bookTitle, int count)
         {
-            this.b = b;
+            this.bookTitle = bookTitle;
             this.count = count;
         }
     }
 
-    public Order(String name)
+    public Order()
     {
-        this.name = name;
         data = new Vector<AtomOrder>();
     }
 
-    public void addOrder(Book b, int count)
+    public void addOrder(String bookTitle, int count)
     {
-        data.add(new AtomOrder(b, count));
+        data.add(new AtomOrder(bookTitle, count));
     }
 
     public void deleteOrder(int index)
@@ -66,7 +66,7 @@ public class Order implements Serializable
         double sum = 0.0;
         for(AtomOrder a : data)
         {
-            sum += a.count * a.b.getPrice();
+            sum += a.count * LibraryManager.library.getBookByTitle(a.bookTitle).getPrice();
         }
         return sum;
     }
@@ -77,7 +77,7 @@ public class Order implements Serializable
         for (int i = 0; i < data.size(); i++)
         {
             AtomOrder a = data.elementAt(i);
-            ret[i][0] = a.b.getTitle();
+            ret[i][0] = a.bookTitle;
             ret[i][1] = a.count;
         }
         return ret;
