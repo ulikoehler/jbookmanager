@@ -186,13 +186,12 @@
     <Component class="javax.swing.JComboBox" name="filterColumnComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="6">
+          <StringArray count="5">
             <StringItem index="0" value="ISBN"/>
             <StringItem index="1" value="Title"/>
-            <StringItem index="2" value="Authors"/>
-            <StringItem index="3" value="Price"/>
-            <StringItem index="4" value="Count"/>
-            <StringItem index="5" value="Comment"/>
+            <StringItem index="2" value="Price"/>
+            <StringItem index="3" value="Count"/>
+            <StringItem index="4" value="Comment"/>
           </StringArray>
         </Property>
       </Properties>
@@ -207,6 +206,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterTypeComboBoxActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="filterStringField">
     </Component>
@@ -216,6 +218,9 @@
           <ResourceString bundle="jbookmanager/view/Bundle.properties" key="JBookManagerFrame.filterOkButton.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterOkButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="filterDeleteButton">
       <Properties>
@@ -223,6 +228,9 @@
           <ResourceString bundle="jbookmanager/view/Bundle.properties" key="JBookManagerFrame.filterDeleteButton.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterDeleteButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

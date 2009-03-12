@@ -43,7 +43,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="numberSpinner1" alignment="0" pref="219" max="32767" attributes="0"/>
+                          <Component id="countSpinner" alignment="0" pref="219" max="32767" attributes="0"/>
                           <Component id="titleField" alignment="1" pref="219" max="32767" attributes="0"/>
                           <Component id="isbnFormattedField" alignment="0" min="-2" pref="139" max="-2" attributes="0"/>
                           <Component id="priceField" alignment="0" pref="219" max="32767" attributes="0"/>
@@ -74,7 +74,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="numberSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="countSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="countLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -149,7 +149,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="jbookmanager.view.NumberSpinner" name="numberSpinner1">
+    <Component class="jbookmanager.view.NumberSpinner" name="countSpinner">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="1" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>

@@ -10,8 +10,6 @@
  */
 package jbookmanager.view;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import jbookmanager.model.Book;
@@ -57,7 +55,7 @@ public class NewBookDialog extends javax.swing.JDialog
         commentLabel = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
         countLabel = new javax.swing.JLabel();
-        numberSpinner1 = new jbookmanager.view.NumberSpinner();
+        countSpinner = new jbookmanager.view.NumberSpinner();
         commentScrollPane = new javax.swing.JScrollPane();
         commentField = new javax.swing.JTextPane();
         priceField = new javax.swing.JTextField();
@@ -90,7 +88,7 @@ public class NewBookDialog extends javax.swing.JDialog
 
         countLabel.setText( i18n.getString("NewBookDialog.countLabel.text")); // NOI18N
 
-        numberSpinner1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
+        countSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         commentScrollPane.setViewportView(commentField);
 
@@ -116,7 +114,7 @@ public class NewBookDialog extends javax.swing.JDialog
                             .addComponent(priceLabel))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(numberSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(countSpinner, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                             .addComponent(titleField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                             .addComponent(isbnFormattedField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))))
@@ -139,7 +137,7 @@ public class NewBookDialog extends javax.swing.JDialog
                     .addComponent(priceLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numberSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(countSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(countLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -167,12 +165,16 @@ public class NewBookDialog extends javax.swing.JDialog
         }
         b.setTitle(title);
         //Price
-        //b.setPrice()
-        
+        b.setPrice(new Double(priceField.getText().replace(',', '.')));
+        //Count
+        b.setCount(countSpinner.getIntValue());
         //Comment
         b.setComment(commentField.getText());
 
         library.addBook(b);
+
+
+        this.setVisible(false);
 
     }//GEN-LAST:event_okButtonActionPerformed
 
@@ -207,9 +209,9 @@ public class NewBookDialog extends javax.swing.JDialog
     private javax.swing.JLabel commentLabel;
     private javax.swing.JScrollPane commentScrollPane;
     private javax.swing.JLabel countLabel;
+    private jbookmanager.view.NumberSpinner countSpinner;
     private javax.swing.JFormattedTextField isbnFormattedField;
     private javax.swing.JLabel isbnLabel;
-    private jbookmanager.view.NumberSpinner numberSpinner1;
     private javax.swing.JButton okButton;
     private javax.swing.JTextField priceField;
     private javax.swing.JLabel priceLabel;

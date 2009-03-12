@@ -144,13 +144,28 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
         filterLabel.setText( i18n.getString("JBookManagerFrame.filterLabel.text")); // NOI18N
 
-        filterColumnComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Title", "Authors", "Price", "Count", "Comment" }));
+        filterColumnComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Title", "Price", "Count", "Comment" }));
 
         filterTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Contains", "Is", "Regex" }));
+        filterTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterTypeComboBoxActionPerformed(evt);
+            }
+        });
 
         filterOkButton.setText( i18n.getString("JBookManagerFrame.filterOkButton.text")); // NOI18N
+        filterOkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterOkButtonActionPerformed(evt);
+            }
+        });
 
         filterDeleteButton.setText( i18n.getString("JBookManagerFrame.filterDeleteButton.text")); // NOI18N
+        filterDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterDeleteButtonActionPerformed(evt);
+            }
+        });
 
         fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
         fileMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -301,6 +316,41 @@ public class JBookManagerFrame extends javax.swing.JFrame
             Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_fileMenuActionPerformed
+
+    private void filterOkButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_filterOkButtonActionPerformed
+    {//GEN-HEADEREND:event_filterOkButtonActionPerformed
+        /**
+         * Get the parameters
+         */
+        int column = filterColumnComboBox.getSelectedIndex();
+        String pattern = filterStringField.getText();
+        int type = filterTypeComboBox.getSelectedIndex();
+        /**
+         * Call the appropriate filter option depending on the type selection
+         */
+        if(type == 0) //contains
+        {
+            bookViewTable.containsFilter(pattern, column);
+        }
+        else if (type == 1) //Is
+        {
+
+        }
+        else //if (type == 2) //Regex
+        {
+            
+        }
+    }//GEN-LAST:event_filterOkButtonActionPerformed
+
+    private void filterDeleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_filterDeleteButtonActionPerformed
+    {//GEN-HEADEREND:event_filterDeleteButtonActionPerformed
+        bookViewTable.deleteFilter();
+    }//GEN-LAST:event_filterDeleteButtonActionPerformed
+
+    private void filterTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_filterTypeComboBoxActionPerformed
+    {//GEN-HEADEREND:event_filterTypeComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filterTypeComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
