@@ -4,13 +4,14 @@
  */
 package jbookmanager.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author uli
  */
-public class Book
+public class Book implements Serializable
 {
     private String isbn;
     private String title;

@@ -46,7 +46,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="listEditComboBox1" pref="219" max="32767" attributes="0"/>
+                          <Component id="authorsField" pref="219" max="32767" attributes="0"/>
                           <Component id="commentField" alignment="0" pref="219" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -72,7 +72,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="authorsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="listEditComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="authorsField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -141,10 +141,10 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="jbookmanager.view.ListEditComboBox" name="listEditComboBox1">
+    <Component class="javax.swing.JTextField" name="authorsField">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.authorsField.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>

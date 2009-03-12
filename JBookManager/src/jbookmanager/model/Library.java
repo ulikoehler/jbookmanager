@@ -5,15 +5,14 @@
 
 package jbookmanager.model;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.io.Serializable;
 import java.util.Vector;
 
 /**
  *
  * @author uli
  */
-public class Library {
+public class Library implements Serializable {
     private String name;
     private Vector<Book> books;
 

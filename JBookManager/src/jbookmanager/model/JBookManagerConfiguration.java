@@ -22,14 +22,7 @@ public class JBookManagerConfiguration
 {
 
     private static final String configFilename = "~/.jbookmanager";
-    private static Properties defaults;
     private Properties props;
-
-
-    static
-    {
-        defaults.setProperty("LibraryFile", "");
-    }
 
     public JBookManagerConfiguration()
     {
@@ -38,7 +31,7 @@ public class JBookManagerConfiguration
         try
         {
             //No action is required
-            props = new Properties(defaults);
+            props = new Properties();
             //Check if the file exists
             File configFile = new File(configFilename);
             if (!configFile.exists())

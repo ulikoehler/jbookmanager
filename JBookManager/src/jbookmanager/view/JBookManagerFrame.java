@@ -41,6 +41,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
             {
                 try
                 {
+                    if(f.isDirectory()) {return true;}
                     return f.getCanonicalPath().endsWith(".lgz");
                 }
                 catch (IOException ex)
@@ -102,6 +103,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
         editMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle( i18n.getString("JBookManagerFrame.title")); // NOI18N
 
         jTable1.setModel(new LibraryTableModel(library));
         jScrollPane1.setViewportView(jTable1);
