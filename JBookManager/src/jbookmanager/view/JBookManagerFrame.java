@@ -146,11 +146,6 @@ public class JBookManagerFrame extends javax.swing.JFrame
         filterColumnComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ISBN", "Title", "Price", "Count", "Comment" }));
 
         filterTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Contains", "Is", "Regex" }));
-        filterTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterTypeComboBoxActionPerformed(evt);
-            }
-        });
 
         filterOkButton.setText( i18n.getString("JBookManagerFrame.filterOkButton.text")); // NOI18N
         filterOkButton.addActionListener(new java.awt.event.ActionListener() {
@@ -167,11 +162,6 @@ public class JBookManagerFrame extends javax.swing.JFrame
         });
 
         fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
-        fileMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileMenuActionPerformed(evt);
-            }
-        });
 
         newLibraryMenuItem.setText( i18n.getString("JBookManagerFrame.newLibraryMenuItem.text")); // NOI18N
         newLibraryMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -183,6 +173,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
         openMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         openMenuItem.setText( i18n.getString("JBookManagerFrame.openMenuItem.text")); // NOI18N
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(openMenuItem);
 
         saveLibraryMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -301,20 +296,6 @@ public class JBookManagerFrame extends javax.swing.JFrame
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void fileMenuActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_fileMenuActionPerformed
-    {//GEN-HEADEREND:event_fileMenuActionPerformed
-        try
-        {
-            fc.showOpenDialog(this);
-            library =
-                    LibraryManager.readLibrary(fc.getSelectedFile().getAbsolutePath());
-        }
-        catch (FileNotFoundException ex)
-        {
-            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_fileMenuActionPerformed
-
     private void filterOkButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_filterOkButtonActionPerformed
     {//GEN-HEADEREND:event_filterOkButtonActionPerformed
         /**
@@ -326,17 +307,17 @@ public class JBookManagerFrame extends javax.swing.JFrame
         /**
          * Call the appropriate filter option depending on the type selection
          */
-        if(type == 0) //contains
+        if (type == 0) //contains
         {
             bookViewTable.containsFilter(pattern, column);
         }
         else if (type == 1) //Is
         {
-
+            bookViewTable.isFilter(pattern, column);
         }
         else //if (type == 2) //Regex
         {
-            
+            bookViewTable.regexFilter(pattern, column);
         }
     }//GEN-LAST:event_filterOkButtonActionPerformed
 
@@ -345,10 +326,20 @@ public class JBookManagerFrame extends javax.swing.JFrame
         bookViewTable.deleteFilter();
     }//GEN-LAST:event_filterDeleteButtonActionPerformed
 
-    private void filterTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_filterTypeComboBoxActionPerformed
-    {//GEN-HEADEREND:event_filterTypeComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_filterTypeComboBoxActionPerformed
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_openMenuItemActionPerformed
+    {//GEN-HEADEREND:event_openMenuItemActionPerformed
+        try
+        {
+            fc.showOpenDialog(this);
+            library =
+                    LibraryManager.readLibrary(fc.getSelectedFile().getAbsolutePath());
+            bookViewTable.updateData(library);
+        }
+        catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(JBookManagerFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_openMenuItemActionPerformed
 
     /**
      * @param args the command line arguments

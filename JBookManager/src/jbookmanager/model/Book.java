@@ -12,13 +12,14 @@ import java.io.Serializable;
  */
 public class Book implements Serializable
 {
+
     private String isbn;
     private String title;
     private String comment;
     //Optional info
     private double price;
     private int count;
-    
+
     /**
      * @return the isbn
      */

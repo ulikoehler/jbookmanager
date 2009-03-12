@@ -10,9 +10,6 @@
               <ResourceString bundle="jbookmanager/view/Bundle.properties" key="JBookManagerFrame.fileMenu.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fileMenuActionPerformed"/>
-          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="newLibraryMenuItem">
               <Properties>
@@ -33,6 +30,9 @@
                   <ResourceString bundle="jbookmanager/view/Bundle.properties" key="JBookManagerFrame.openMenuItem.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="saveLibraryMenuItem">
               <Properties>
@@ -206,9 +206,6 @@
           </StringArray>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterTypeComboBoxActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="filterStringField">
     </Component>

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jbookmanager.model;
 
 import java.io.Serializable;
@@ -12,7 +11,9 @@ import java.util.Vector;
  *
  * @author uli
  */
-public class Library implements Serializable {
+public class Library implements Serializable
+{
+
     private String name;
     private Vector<Book> books;
 
@@ -38,9 +39,9 @@ public class Library implements Serializable {
 
     public Book getBookByISBN(String isbn)
     {
-        for(Book b : books)
+        for (Book b : books)
         {
-            if(b.getIsbn().equals(isbn))
+            if (b.getIsbn().equals(isbn))
             {
                 return b;
             }
@@ -50,9 +51,9 @@ public class Library implements Serializable {
 
     public Book getBookByTitle(String title)
     {
-        for(Book b : books)
+        for (Book b : books)
         {
-            if(b.getTitle().equals(title))
+            if (b.getTitle().equals(title))
             {
                 return b;
             }
@@ -60,10 +61,14 @@ public class Library implements Serializable {
         return null;
     }
 
+    /**
+     * A wrapper function that covers all book and all columns within a 5-column array
+     * @return An array representation of the library
+     */
     public Object[][] getData()
     {
         Object[][] ret = new Object[getBookCount()][5];
-        for(int i = 0; i < getBookCount(); i++)
+        for (int i = 0; i < getBookCount(); i++)
         {
             Book b = books.elementAt(i);
             ret[i][0] = b.getIsbn();

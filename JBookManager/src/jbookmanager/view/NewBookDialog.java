@@ -155,7 +155,8 @@ public class NewBookDialog extends javax.swing.JDialog
         String title = titleField.getText();
         if (title.isEmpty())
         {
-            JOptionPane.showMessageDialog(this, "The title mustn't be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "The title mustn't be empty!", "Error",
+                                          JOptionPane.ERROR_MESSAGE);
             return;
         }
         b.setTitle(title);

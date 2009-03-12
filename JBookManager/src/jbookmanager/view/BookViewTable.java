@@ -51,13 +51,15 @@ public class BookViewTable extends JTable implements Serializable
     public void greaterFilter(String substr, int... column)
     {
         //TODO implement in main frame
-        sorter.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.AFTER, new Double(substr), column));
+        sorter.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.AFTER,
+                                                   new Double(substr), column));
     }
 
     public void lessFilter(String substr, int... column)
     {
         //TODO implement in main frame
-        sorter.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.BEFORE, new Double(substr), column));
+        sorter.setRowFilter(RowFilter.numberFilter(RowFilter.ComparisonType.BEFORE, new Double(
+                substr), column));
     }
 
     public void regexFilter(String regex, int... column)
@@ -76,9 +78,8 @@ public class BookViewTable extends JTable implements Serializable
      */
     public void updateData(Library library)
     {
-        ((DefaultTableModel)getModel()).setDataVector(library.getData(), columnNames);
+        ((DefaultTableModel) getModel()).setDataVector(library.getData(), columnNames);
     }
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -90,7 +91,10 @@ public class BookViewTable extends JTable implements Serializable
     private void initComponents() {
     }// </editor-fold>//GEN-END:initComponents
     private TableRowSorter<DefaultTableModel> sorter;
-    private static final String[] columnNames = {"ISBN", "Title", "Price", "Count", "Comment"};
+    private static final String[] columnNames =
+    {
+        "ISBN", "Title", "Price", "Count", "Comment"
+    };
     //Column specifiers
     public static final int ISBN_COLUMN = 0;
     public static final int TITLE_COLUMN = 1;
