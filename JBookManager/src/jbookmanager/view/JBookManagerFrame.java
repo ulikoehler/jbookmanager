@@ -139,10 +139,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
         isbnFormattedField = new javax.swing.JFormattedTextField();
         priceField = new javax.swing.JFormattedTextField();
         countSpinner = new javax.swing.JSpinner();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        commentFieldScrollPane = new javax.swing.JScrollPane();
         commentField = new javax.swing.JEditorPane();
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        newButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newLibraryMenuItem = new javax.swing.JMenuItem();
@@ -191,7 +192,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
         titleField.setText( i18n.getString("JBookManagerFrame.titleField.text")); // NOI18N
 
         try {
-            isbnFormattedField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-####")));
+            isbnFormattedField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-##########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -200,11 +201,13 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
         countSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 
-        jScrollPane2.setViewportView(commentField);
+        commentFieldScrollPane.setViewportView(commentField);
 
         updateButton.setText( i18n.getString("JBookManagerFrame.updateButton.text")); // NOI18N
 
         deleteButton.setText( i18n.getString("JBookManagerFrame.deleteButton.text")); // NOI18N
+
+        newButton.setText( i18n.getString("JBookManagerFrame.newButton.text")); // NOI18N
 
         fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
 
@@ -266,9 +269,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filterDeleteButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                        .addComponent(newButton, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(titleLabel)
@@ -284,7 +289,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(commentLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)))
+                        .addComponent(commentFieldScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -320,11 +325,13 @@ public class JBookManagerFrame extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(commentLabel)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(commentFieldScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updateButton)
-                            .addComponent(deleteButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deleteButton)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(newButton)
+                                .addComponent(updateButton))))
                     .addComponent(bookScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -402,6 +409,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private javax.swing.JList bookList;
     private javax.swing.JScrollPane bookScrollPane;
     private javax.swing.JEditorPane commentField;
+    private javax.swing.JScrollPane commentFieldScrollPane;
     private javax.swing.JLabel commentLabel;
     private javax.swing.JLabel countLabel;
     private javax.swing.JSpinner countSpinner;
@@ -416,9 +424,9 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private javax.swing.JComboBox filterTypeComboBox;
     private javax.swing.JFormattedTextField isbnFormattedField;
     private javax.swing.JLabel isbnLabel;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JButton newBookButton;
+    private javax.swing.JButton newButton;
     private javax.swing.JMenuItem newLibraryMenuItem;
     private javax.swing.JFormattedTextField priceField;
     private javax.swing.JLabel priceLabel;

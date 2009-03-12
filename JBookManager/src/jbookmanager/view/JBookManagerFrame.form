@@ -111,9 +111,11 @@
                       <Component id="filterDeleteButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="updateButton" pref="137" max="32767" attributes="0"/>
+                      <Component id="newButton" pref="98" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="deleteButton" min="-2" pref="151" max="-2" attributes="0"/>
+                      <Component id="updateButton" min="-2" pref="95" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deleteButton" min="-2" pref="89" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -133,7 +135,7 @@
                   <Group type="102" attributes="0">
                       <Component id="commentLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="222" max="32767" attributes="0"/>
+                      <Component id="commentFieldScrollPane" pref="222" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -178,12 +180,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="commentLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" min="-2" pref="133" max="-2" attributes="0"/>
+                          <Component id="commentFieldScrollPane" min="-2" pref="133" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="updateButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="newButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="updateButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Component id="bookScrollPane" alignment="0" min="-2" pref="283" max="-2" attributes="0"/>
@@ -313,7 +318,7 @@
     <Component class="javax.swing.JFormattedTextField" name="isbnFormattedField">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="###-####" subtype="-1" type="5"/>
+          <Format format="###-##########" subtype="-1" type="5"/>
         </Property>
       </Properties>
     </Component>
@@ -331,7 +336,7 @@
         </Property>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+    <Container class="javax.swing.JScrollPane" name="commentFieldScrollPane">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
@@ -353,6 +358,13 @@
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
           <ResourceString bundle="jbookmanager/view/Bundle.properties" key="JBookManagerFrame.deleteButton.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="newButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="JBookManagerFrame.newButton.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
