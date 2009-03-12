@@ -171,7 +171,10 @@ public class NewBookDialog extends javax.swing.JDialog
         }
         b.setTitle(title);
         //Price
-        b.setPrice(new Double(priceField.getText().replace(',', '.')));
+        String priceText = priceField.getText();
+        if(!priceText.isEmpty())
+        {b.setPrice(new Double(priceText.replace(',', '.')));}
+        else{b.setPrice(0.0);}
         //Count
         b.setCount(countSpinner.getIntValue());
         //Comment

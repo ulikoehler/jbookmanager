@@ -13,7 +13,6 @@ import java.util.Vector;
  */
 public class Library implements Serializable
 {
-
     private String name;
     private Vector<Book> books;
 
@@ -59,6 +58,11 @@ public class Library implements Serializable
             }
         }
         return null;
+    }
+
+    public void deleteBook(int index)
+    {
+        books.remove(index);
     }
 
     /**
