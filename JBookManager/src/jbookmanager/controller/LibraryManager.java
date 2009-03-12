@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -31,8 +32,7 @@ public abstract class LibraryManager
      * This represents the library opened at this time
      */
     public static Library library = new Library();
-    public static DecimalFormat currencyFormat = new DecimalFormat("#######0.00 " + Currency.getInstance(Locale.
-            getDefault()));
+    public static NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
 
     public static Library readLibrary(String file) throws FileNotFoundException
     {
