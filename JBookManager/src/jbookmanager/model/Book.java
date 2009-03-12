@@ -5,7 +5,6 @@
 package jbookmanager.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
@@ -15,7 +14,6 @@ public class Book implements Serializable
 {
     private String isbn;
     private String title;
-    private List<String> authors;
     private String comment;
     //Optional info
     private double price;
@@ -51,22 +49,6 @@ public class Book implements Serializable
     public void setTitle(String title)
     {
         this.title = title;
-    }
-
-    /**
-     * @return the authors
-     */
-    public List<String> getAuthors()
-    {
-        return authors;
-    }
-
-    /**
-     * @param authors the authors to set
-     */
-    public void setAuthors(List<String> authors)
-    {
-        this.authors = authors;
     }
 
     /**

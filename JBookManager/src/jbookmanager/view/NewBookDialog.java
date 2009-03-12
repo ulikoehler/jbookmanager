@@ -53,11 +53,13 @@ public class NewBookDialog extends javax.swing.JDialog
         isbnFormattedField = new javax.swing.JFormattedTextField();
         titleLabel = new javax.swing.JLabel();
         titleField = new javax.swing.JTextField();
-        authorsLabel = new javax.swing.JLabel();
+        priceLabel = new javax.swing.JLabel();
         commentLabel = new javax.swing.JLabel();
         commentField = new javax.swing.JTextField();
         okButton = new javax.swing.JButton();
-        authorsField = new javax.swing.JTextField();
+        priceField = new javax.swing.JFormattedTextField();
+        countLabel = new javax.swing.JLabel();
+        numberSpinner1 = new jbookmanager.view.NumberSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle( i18n.getString("NewBookDialog.title")); // NOI18N
@@ -74,7 +76,7 @@ public class NewBookDialog extends javax.swing.JDialog
 
         titleField.setText( i18n.getString("NewBookDialog.titleField.text")); // NOI18N
 
-        authorsLabel.setText( i18n.getString("NewBookDialog.authorsLabel.text")); // NOI18N
+        priceLabel.setText( i18n.getString("NewBookDialog.priceLabel.text")); // NOI18N
 
         commentLabel.setText( i18n.getString("NewBookDialog.commentLabel.text")); // NOI18N
 
@@ -85,7 +87,12 @@ public class NewBookDialog extends javax.swing.JDialog
             }
         });
 
-        authorsField.setText( i18n.getString("NewBookDialog.authorsField.text")); // NOI18N
+        priceField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.00 €"))));
+        priceField.setText( i18n.getString("NewBookDialog.priceField.text")); // NOI18N
+
+        countLabel.setText( i18n.getString("NewBookDialog.countLabel.text")); // NOI18N
+
+        numberSpinner1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(0), null, Integer.valueOf(1)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,15 +109,17 @@ public class NewBookDialog extends javax.swing.JDialog
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(isbnFormattedField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(titleField, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)))
+                    .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(authorsLabel)
-                            .addComponent(commentLabel))
+                            .addComponent(priceLabel)
+                            .addComponent(commentLabel)
+                            .addComponent(countLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(authorsField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                            .addComponent(commentField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)))
-                    .addComponent(okButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
+                            .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(commentField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(numberSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -126,15 +135,19 @@ public class NewBookDialog extends javax.swing.JDialog
                     .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(authorsLabel)
-                    .addComponent(authorsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(priceLabel)
+                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(commentLabel)
                     .addComponent(commentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(countLabel)
+                    .addComponent(numberSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(okButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -153,9 +166,9 @@ public class NewBookDialog extends javax.swing.JDialog
             return;
         }
         b.setTitle(title);
-        //Authors
-        List<String> authors = new LinkedList<String>();
-        b.setAuthors(authors);
+        //Price
+        //b.setPrice()
+        
         //Comment
         b.setComment(commentField.getText());
 
@@ -190,13 +203,15 @@ public class NewBookDialog extends javax.swing.JDialog
     private Library library;
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField authorsField;
-    private javax.swing.JLabel authorsLabel;
     private javax.swing.JTextField commentField;
     private javax.swing.JLabel commentLabel;
+    private javax.swing.JLabel countLabel;
     private javax.swing.JFormattedTextField isbnFormattedField;
     private javax.swing.JLabel isbnLabel;
+    private jbookmanager.view.NumberSpinner numberSpinner1;
     private javax.swing.JButton okButton;
+    private javax.swing.JFormattedTextField priceField;
+    private javax.swing.JLabel priceLabel;
     private javax.swing.JTextField titleField;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
