@@ -48,7 +48,6 @@ public class NewBookDialog extends javax.swing.JDialog
         titleLabel = new javax.swing.JLabel();
         titleField = new javax.swing.JTextField();
         authorsLabel = new javax.swing.JLabel();
-        authorsComboBox = new javax.swing.JComboBox();
         commentLabel = new javax.swing.JLabel();
         commentField = new javax.swing.JTextField();
         okButton = new javax.swing.JButton();
@@ -69,8 +68,6 @@ public class NewBookDialog extends javax.swing.JDialog
         titleField.setText( i18n.getString("NewBookDialog.titleField.text")); // NOI18N
 
         authorsLabel.setText( i18n.getString("NewBookDialog.authorsLabel.text")); // NOI18N
-
-        authorsComboBox.setEditable(true);
 
         commentLabel.setText( i18n.getString("NewBookDialog.commentLabel.text")); // NOI18N
 
@@ -101,9 +98,7 @@ public class NewBookDialog extends javax.swing.JDialog
                             .addComponent(authorsLabel)
                             .addComponent(commentLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(commentField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                            .addComponent(authorsComboBox, 0, 219, Short.MAX_VALUE)))
+                        .addComponent(commentField, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
                     .addComponent(okButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -119,16 +114,14 @@ public class NewBookDialog extends javax.swing.JDialog
                     .addComponent(titleLabel)
                     .addComponent(titleField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(authorsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(authorsLabel))
+                .addComponent(authorsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(commentLabel)
                     .addComponent(commentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(okButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,7 +174,6 @@ public class NewBookDialog extends javax.swing.JDialog
     }
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox authorsComboBox;
     private javax.swing.JLabel authorsLabel;
     private javax.swing.JTextField commentField;
     private javax.swing.JLabel commentLabel;
