@@ -32,15 +32,15 @@ public class BookViewTable extends JTable implements Serializable
 
     public void setLibrary(Library library)
     {
-        model = new LibraryTableModel(library);
+        model = new LibraryTableModel();
         setModel(model);
-        sorter = new TableRowSorter<LibraryTableModel>(model);
-        setRowSorter(sorter);
+        //sorter = new TableRowSorter<LibraryTableModel>(model);
+        //setRowSorter(sorter);
     }
 
     public void containsFilter(String substr, int... column)
     {
-        sorter.setRowFilter(RowFilter.regexFilter(".*" + substr + ".*", column));
+        //sorter.setRowFilter(RowFilter.regexFilter(".*" + substr + ".*", column));
     }
 
     /** This method is called from within the constructor to

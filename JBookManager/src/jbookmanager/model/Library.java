@@ -26,7 +26,11 @@ public class Library implements Serializable {
     public void addBook(Book b)
     {
         books.add(b);
-        Logger.getLogger(JBookManagerConfiguration.class.getName()).log(Level.SEVERE, "Added book", "Added book");
+    }
+
+    public int getBookCount()
+    {
+        return books.size();
     }
 
     public Book getBookAt(int index)

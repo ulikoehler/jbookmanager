@@ -58,7 +58,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
                 return "Library data files";
             }
         });
-        
+        bookViewTable.repaint();
         initLibrary();
     }
 
@@ -105,6 +105,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
         filterStringField = new javax.swing.JTextField();
         filterOkButton = new javax.swing.JButton();
         filterDeleteButton = new javax.swing.JButton();
+        sizeBUtton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         newLibraryMenuItem = new javax.swing.JMenuItem();
@@ -149,6 +150,13 @@ public class JBookManagerFrame extends javax.swing.JFrame
         filterOkButton.setText( i18n.getString("JBookManagerFrame.filterOkButton.text")); // NOI18N
 
         filterDeleteButton.setText( i18n.getString("JBookManagerFrame.filterDeleteButton.text")); // NOI18N
+
+        sizeBUtton.setText( i18n.getString("JBookManagerFrame.sizeBUtton.text")); // NOI18N
+        sizeBUtton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sizeBUttonActionPerformed(evt);
+            }
+        });
 
         fileMenu.setText( i18n.getString("JBookManagerFrame.fileMenu.text")); // NOI18N
 
@@ -206,7 +214,9 @@ public class JBookManagerFrame extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filterOkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(filterDeleteButton)))
+                        .addComponent(filterDeleteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addComponent(sizeBUtton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -220,7 +230,8 @@ public class JBookManagerFrame extends javax.swing.JFrame
                     .addComponent(filterOkButton)
                     .addComponent(filterLabel)
                     .addComponent(newBookButton)
-                    .addComponent(filterDeleteButton))
+                    .addComponent(filterDeleteButton)
+                    .addComponent(sizeBUtton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -276,6 +287,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void sizeBUttonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sizeBUttonActionPerformed
+    {//GEN-HEADEREND:event_sizeBUttonActionPerformed
+        JOptionPane.showMessageDialog(this, library.getBookCount());
+    }//GEN-LAST:event_sizeBUttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,7 +306,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
             }
         });
     }
-    private Library library;
+    public static Library library = new Library();
     private JFileChooser fc = new JFileChooser();
     private JBookManagerConfiguration config = new JBookManagerConfiguration();
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
@@ -310,5 +326,6 @@ public class JBookManagerFrame extends javax.swing.JFrame
     private javax.swing.JMenuItem newLibraryMenuItem;
     private javax.swing.JMenuItem saveCopyMenuItem;
     private javax.swing.JMenuItem saveLibraryMenuItem;
+    private javax.swing.JButton sizeBUtton;
     // End of variables declaration//GEN-END:variables
 }

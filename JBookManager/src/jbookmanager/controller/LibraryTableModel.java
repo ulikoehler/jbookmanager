@@ -12,6 +12,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import jbookmanager.model.Library;
+import jbookmanager.view.JBookManagerFrame;
 
 public class LibraryTableModel extends AbstractTableModel
 {
@@ -22,10 +23,20 @@ public class LibraryTableModel extends AbstractTableModel
         "ISBN", "Title", "Authors", "Price", "Count", "Comment"
     };
 
-    public LibraryTableModel(Library library)
+    public LibraryTableModel()
     {
-        this.library = library;
         addListener();
+    }
+
+    public static String[] getColumnNames()
+    {
+        return columnNames;
+    }
+
+    @Override
+    public String getColumnName(int column)
+    {
+        return columnNames[column];
     }
 
     private void addListener()
@@ -42,32 +53,33 @@ public class LibraryTableModel extends AbstractTableModel
                 {
                     case 0: //ISBN
                     {
-                        library.getBookAt(row).setIsbn((String)getValueAt(row, column));
+                        library.getBookAt(row).setIsbn((String) getValueAt(row, column));
                         break;
                     }
                     case 1: //Title
                     {
-                        library.getBookAt(row).setTitle((String)getValueAt(row, column));
+                        library.getBookAt(row).setTitle((String) getValueAt(row, column));
                         break;
                     }
                     case 2: //Authors
                     {
-                        library.getBookAt(row).setAuthors(LibraryManager.assembleList((String)getValueAt(row, column)));
+                        library.getBookAt(row).setAuthors(LibraryManager.assembleList((String) getValueAt(
+                                row, column)));
                         break;
                     }
                     case 3: //Price
                     {
-                        library.getBookAt(row).setPrice((Double)getValueAt(row, column));
+                        library.getBookAt(row).setPrice((Double) getValueAt(row, column));
                         break;
                     }
                     case 4: //Count
                     {
-                        library.getBookAt(row).setCount((Integer)getValueAt(row, column));
+                        library.getBookAt(row).setCount((Integer) getValueAt(row, column));
                         break;
                     }
                     case 5: //Comment
                     {
-                        library.getBookAt(row).setComment((String)getValueAt(row, column));
+                        library.getBookAt(row).setComment((String) getValueAt(row, column));
                         break;
                     }
                 }
@@ -110,27 +122,27 @@ public class LibraryTableModel extends AbstractTableModel
         {
             case 0: //ISBN
             {
-                return library.getBookAt(row).getIsbn();
+                return JBookManagerFrame.library.getBookAt(row).getIsbn();
             }
             case 1: //Title
             {
-                return library.getBookAt(row).getTitle();
+                return JBookManagerFrame.library.getBookAt(row).getTitle();
             }
             case 2: //Authors
             {
-                return LibraryManager.listOverview(library.getBookAt(row).getAuthors());
+                return LibraryManager.listOverview(JBookManagerFrame.library.getBookAt(row).getAuthors());
             }
             case 3: //Price
             {
-                return library.getBookAt(row).getPrice();
+                return JBookManagerFrame.library.getBookAt(row).getPrice();
             }
             case 4: //Count
             {
-                return library.getBookAt(row).getCount();
+                return JBookManagerFrame.library.getBookAt(row).getCount();
             }
             case 5: //Comment
             {
-                return library.getBookAt(row).getComment();
+                return JBookManagerFrame.library.getBookAt(row).getComment();
             }
             default:
                 return null;
@@ -146,10 +158,10 @@ public class LibraryTableModel extends AbstractTableModel
     @Override
     public int getRowCount()
     {
-        if (library == null)
+        if(JBookManagerFrame.library == null)
         {
             return 0;
         }
-        return library.getBooks().size();
+        return JBookManagerFrame.library.getBookCount();
     }
 }

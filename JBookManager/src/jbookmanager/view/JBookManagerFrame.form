@@ -105,6 +105,8 @@
                       <Component id="filterOkButton" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="filterDeleteButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <Component id="sizeBUtton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -123,6 +125,7 @@
                   <Component id="filterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newBookButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="filterDeleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="sizeBUtton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="289" max="-2" attributes="0"/>
@@ -210,6 +213,16 @@
           <ResourceString bundle="jbookmanager/view/Bundle.properties" key="JBookManagerFrame.filterDeleteButton.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="sizeBUtton">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="JBookManagerFrame.sizeBUtton.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sizeBUttonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
