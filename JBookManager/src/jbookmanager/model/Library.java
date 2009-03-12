@@ -7,8 +7,7 @@ package jbookmanager.model;
 
 import java.io.Serializable;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -21,6 +20,23 @@ public class Library implements Serializable {
     public Library()
     {
         books = new Vector<Book>();
+    }
+
+    public String[] getTitleList()
+    {
+        String[] ret = new String[books.size()];
+        for(int i = 0; i < books.size(); i++)
+        {
+            Book b = books.elementAt(i);
+            ret[i] = b.getTitle();
+        }
+        return ret;
+    }
+
+    public void updateTitleListModel(DefaultListModel model)
+    {
+        model.removeAllElements();
+        model.copyInto(getTitleList());
     }
 
     public void addBook(Book b)
