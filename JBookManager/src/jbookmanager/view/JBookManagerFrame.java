@@ -251,14 +251,29 @@ public class JBookManagerFrame extends javax.swing.JFrame
 
     private void saveCopyMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveCopyMenuItemActionPerformed
     {//GEN-HEADEREND:event_saveCopyMenuItemActionPerformed
+        //Asks the user in which file to save the library
         fc.setDialogTitle(i18n.getString("Save copy"));
         fc.showSaveDialog(this);
         String filename = fc.getSelectedFile().getAbsolutePath();
+        //Save the library (as gzipped XML data)
         LibraryManager.writeLibrary(library, filename);
     }//GEN-LAST:event_saveCopyMenuItemActionPerformed
 
     private void saveLibraryMenuItemActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_saveLibraryMenuItemActionPerformed
     {//GEN-HEADEREND:event_saveLibraryMenuItemActionPerformed
+        //No saving file present yet
+        if(config.getProperty("LibraryFile").equals(""))
+        {
+            //Asks the user in which file to save the library
+            fc.setDialogTitle(i18n.getString("Save"));
+            fc.showSaveDialog(this);
+            String filename = fc.getSelectedFile().getAbsolutePath();
+            config.setProperty("LibraryFile", filename);
+            //Save the library (as gzipped XML data)
+            LibraryManager.writeLibrary(library, filename);
+            return;
+        }
+        //Else, if the saving filename is already set in the configuration, use it
         LibraryManager.writeLibrary(library, config.getProperty("LibraryFile"));
     }//GEN-LAST:event_saveLibraryMenuItemActionPerformed
 
@@ -331,9 +346,11 @@ public class JBookManagerFrame extends javax.swing.JFrame
         try
         {
             fc.showOpenDialog(this);
+            String filename = fc.getSelectedFile().getAbsolutePath();
             library =
-                    LibraryManager.readLibrary(fc.getSelectedFile().getAbsolutePath());
+                    LibraryManager.readLibrary(filename);
             bookViewTable.updateData(library);
+            config.setProperty("Library", filename);
         }
         catch (FileNotFoundException ex)
         {
