@@ -13,9 +13,8 @@ package jbookmanager.view;
 import java.io.Serializable;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
-import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import jbookmanager.controller.LibraryTableModel;
 import jbookmanager.model.Library;
 
 /**
@@ -33,9 +32,9 @@ public class BookViewTable extends JTable implements Serializable
 
     public void setLibrary(Library library)
     {
-        model = new LibraryTableModel();
+        DefaultTableModel model = new DefaultTableModel(library.getData(), columnNames);
         setModel(model);
-        sorter = new TableRowSorter<LibraryTableModel>(model);
+        sorter = new TableRowSorter<DefaultTableModel>(model);
         setRowSorter(sorter);
     }
 
@@ -73,13 +72,11 @@ public class BookViewTable extends JTable implements Serializable
 
     /**
      * Updates the table content
+     * @param library
      */
-    public void bookInserted()
+    public void updateData(Library library)
     {
-        //TODO This method updates all rows but only one update is needed
-        model.fireTableChanged(new TableModelEvent(model));
-        //model.fireTableDataChanged();
-        //model.fireTableRowsInserted(0, model.getRowCount()-1);
+        ((DefaultTableModel)getModel()).setDataVector(library.getData(), columnNames);
     }
 
 
@@ -92,13 +89,13 @@ public class BookViewTable extends JTable implements Serializable
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
     }// </editor-fold>//GEN-END:initComponents
-    private TableRowSorter<LibraryTableModel> sorter;
-    private LibraryTableModel model;
+    private TableRowSorter<DefaultTableModel> sorter;
+    private static final String[] columnNames = {"ISBN", "Title", "Price", "Count", "Comment"};
     //Column specifiers
     public static final int ISBN_COLUMN = 0;
     public static final int TITLE_COLUMN = 1;
-    public static final int AUTHORS_COLUMN = 2;
-    public static final int PRICE_COLUMN = 3;
+    public static final int PRICE_COLUMN = 2;
+    public static final int COUNT_COLUMN = 3;
     public static final int COMMENT_COLUMN = 4;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

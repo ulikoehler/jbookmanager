@@ -7,8 +7,6 @@ package jbookmanager.model;
 
 import java.io.Serializable;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -60,6 +58,21 @@ public class Library implements Serializable {
             }
         }
         return null;
+    }
+
+    public Object[][] getData()
+    {
+        Object[][] ret = new Object[getBookCount()][5];
+        for(int i = 0; i < getBookCount(); i++)
+        {
+            Book b = books.elementAt(i);
+            ret[i][0] = b.getIsbn();
+            ret[i][1] = b.getTitle();
+            ret[i][2] = b.getPrice();
+            ret[i][3] = b.getCount();
+            ret[i][4] = b.getComment();
+        }
+        return ret;
     }
 
     /**

@@ -22,7 +22,6 @@ import javax.swing.filechooser.FileFilter;
 import jbookmanager.model.JBookManagerConfiguration;
 import jbookmanager.model.Library;
 import jbookmanager.controller.LibraryManager;
-import jbookmanager.controller.LibraryTableModel;
 
 /**
  *
@@ -287,7 +286,7 @@ public class JBookManagerFrame extends javax.swing.JFrame
     {//GEN-HEADEREND:event_newBookButtonActionPerformed
         NewBookDialog newBookDialog = new NewBookDialog(this, true);
         newBookDialog.setVisible(true);
-        bookViewTable.bookInserted();
+        bookViewTable.updateData(library);
     }//GEN-LAST:event_newBookButtonActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
