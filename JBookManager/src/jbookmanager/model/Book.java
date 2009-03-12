@@ -12,11 +12,124 @@ import java.util.List;
  */
 public class Book
 {
-    public String name;
-    public String isbn;
-    public String title;
-    public List<String> authors;
-    public String comment;
-    public int pages;
-    public int count;
+    private String name;
+    private String isbn;
+    private String title;
+    private List<String> authors;
+    private String comment;
+    //Optional info
+    private double price;
+    private int count;
+
+    /**
+     * @return the name
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * @return the isbn
+     */
+    public String getIsbn()
+    {
+        return isbn;
+    }
+
+    /**
+     * @param isbn the isbn to set
+     */
+    public void setIsbn(String isbn)
+    {
+        this.isbn = isbn;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    /**
+     * @return the authors
+     */
+    public List<String> getAuthors()
+    {
+        return authors;
+    }
+
+    /**
+     * @param authors the authors to set
+     */
+    public void setAuthors(List<String> authors)
+    {
+        this.setAuthors(authors);
+    }
+
+    /**
+     * @return the comment
+     */
+    public String getComment()
+    {
+        return comment;
+    }
+
+    /**
+     * @param comment the comment to set
+     */
+    public void setComment(String comment)
+    {
+        this.comment = comment;
+    }
+
+    /**
+     * @return the count
+     */
+    public int getCount()
+    {
+        return count;
+    }
+
+    /**
+     * @param count the count to set
+     */
+    public void setCount(int count)
+    {
+        this.count = count;
+    }
+
+    /**
+     * @return the price
+     */
+    public double getPrice()
+    {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(double price)
+    {
+        this.price = price;
+    }
 }

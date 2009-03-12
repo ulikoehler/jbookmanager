@@ -11,6 +11,9 @@
 
 package jbookmanager.view;
 
+import java.util.ResourceBundle;
+import jbookmanager.model.Library;
+
 /**
  *
  * @author uli
@@ -58,6 +61,8 @@ public class JBookManagerFrame extends javax.swing.JFrame {
         });
     }
 
+    private Library mainLibrary;
+    private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 

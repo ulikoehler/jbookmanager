@@ -12,6 +12,38 @@ import java.util.List;
  * @author uli
  */
 public class Library {
-    public String name;
-    public List<Book> book;
+    private String name;
+    private List<Book> books;
+
+    /**
+     * @return the name
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
+     * @return the books
+     */
+    public List<Book> getBooks()
+    {
+        return books;
+    }
+
+    /**
+     * @param books the books to set
+     */
+    public void setBooks(List<Book> books)
+    {
+        this.books = books;
+    }
 }
