@@ -35,7 +35,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="isbnFormattedTextField" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                          <Component id="isbnFormattedField" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                           <Component id="titleField" alignment="0" pref="220" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -46,8 +46,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextField1" alignment="0" pref="219" max="32767" attributes="0"/>
-                          <Component id="jComboBox1" alignment="0" pref="219" max="32767" attributes="0"/>
+                          <Component id="commentField" alignment="0" pref="219" max="32767" attributes="0"/>
+                          <Component id="authorsComboBox" alignment="0" pref="219" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="okButton" alignment="1" pref="291" max="32767" attributes="0"/>
@@ -62,7 +62,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="isbnLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="isbnFormattedTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="isbnFormattedField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -71,13 +71,13 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBox1" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="authorsComboBox" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="authorsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="commentLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="commentField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="okButton" min="-2" max="-2" attributes="0"/>
@@ -94,7 +94,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="isbnFormattedTextField">
+    <Component class="javax.swing.JFormattedTextField" name="isbnFormattedField">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="###-##########" subtype="-1" type="5"/>
@@ -122,7 +122,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="authorsComboBox">
       <Properties>
         <Property name="editable" type="boolean" value="true"/>
       </Properties>
@@ -134,10 +134,10 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="commentField">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.jTextField1.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="jbookmanager/view/Bundle.properties" key="NewBookDialog.commentField.text" replaceFormat=" i18n.getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>

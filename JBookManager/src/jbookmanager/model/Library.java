@@ -5,6 +5,7 @@
 
 package jbookmanager.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -14,6 +15,40 @@ import java.util.List;
 public class Library {
     private String name;
     private List<Book> books;
+
+    public Library()
+    {
+        books = new LinkedList<Book>();
+    }
+
+    public void addBook(Book b)
+    {
+        books.add(b);
+    }
+
+    public Book getBookByISBN(String isbn)
+    {
+        for(Book b : books)
+        {
+            if(b.getIsbn().equals(isbn))
+            {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public Book getBookByTitle(String isbn)
+    {
+        for(Book b : books)
+        {
+            if(b.getIsbn().equals(isbn))
+            {
+                return b;
+            }
+        }
+        return null;
+    }
 
     /**
      * @return the name

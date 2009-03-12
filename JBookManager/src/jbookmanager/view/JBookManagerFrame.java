@@ -8,7 +8,6 @@
  *
  * Created on 26.02.2009, 19:37:49
  */
-
 package jbookmanager.view;
 
 import java.util.ResourceBundle;
@@ -18,10 +17,12 @@ import jbookmanager.model.Library;
  *
  * @author uli
  */
-public class JBookManagerFrame extends javax.swing.JFrame {
+public class JBookManagerFrame extends javax.swing.JFrame
+{
 
     /** Creates new form JBookManagerFrame */
-    public JBookManagerFrame() {
+    public JBookManagerFrame()
+    {
         initComponents();
     }
 
@@ -51,19 +52,21 @@ public class JBookManagerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+     * @param args the command line arguments
+     */
+    public static void main(String args[])
+    {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+
+            public void run()
+            {
                 new JBookManagerFrame().setVisible(true);
             }
         });
     }
-
     private Library mainLibrary;
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }
