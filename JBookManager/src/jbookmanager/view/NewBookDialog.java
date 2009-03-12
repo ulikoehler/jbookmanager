@@ -199,7 +199,6 @@ public class NewBookDialog extends javax.swing.JDialog
             }
         });
     }
-    private Library library;
     private ResourceBundle i18n = ResourceBundle.getBundle("jbookmanager/view/Bundle");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane commentField;

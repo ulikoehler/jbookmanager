@@ -102,18 +102,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" max="-2" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="674" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="1">
                       <Component id="newBookButton" min="-2" pref="104" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="filterLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="filterColumnComboBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="filterTypeComboBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="filterStringField" min="-2" pref="91" max="-2" attributes="0"/>
+                      <Component id="filterStringField" min="-2" pref="132" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="filterOkButton" min="-2" pref="56" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -129,13 +129,13 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="filterTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="filterColumnComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="filterStringField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="filterOkButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="filterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newBookButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="filterDeleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filterOkButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filterStringField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filterColumnComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filterTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="filterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="289" max="-2" attributes="0"/>
