@@ -72,7 +72,7 @@ public class Library implements Serializable
      * A wrapper function that covers all book and all columns within a 5-column array
      * @return An array representation of the library
      */
-    public Object[][] getData()
+    public Object[][] getDataVector()
     {
         Object[][] ret = new Object[getBookCount()][5];
         for (int i = 0; i < getBookCount(); i++)

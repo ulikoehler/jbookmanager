@@ -11,7 +11,6 @@
 
 package jbookmanager.view;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.util.ResourceBundle;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
@@ -41,8 +40,11 @@ public class EditOrderDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.assocOrder = order;
         initComponents();
-        //Init the book title list
+        //Init the fields
+        nameField.setText(assocOrder.getName());
+        //Init the tables
         updateBookTitleList();
+        updateSuborderTable();
     }
 
     public void updateBookTitleList()
@@ -78,11 +80,6 @@ public class EditOrderDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle( i18n.getString("EditOrderDialog.title")); // NOI18N
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         nameLabel.setText( i18n.getString("EditOrderDialog.nameLabel.text")); // NOI18N
 
@@ -188,35 +185,34 @@ public class EditOrderDialog extends javax.swing.JDialog {
         String bookTitle = (String) bookTitleList.getSelectedValue();
         int count = countSpinner.getIntValue();
         getAssocOrder().addOrder(bookTitle, count);
-        updateTable();
+        updateSuborderTable();
     }//GEN-LAST:event_addButtonActionPerformed
 
-    private void updateTable()
+    private void updateSuborderTable()
     {
-        ((DefaultTableModel)suborderTable.getModel()).setDataVector(getAssocOrder().getData(), columnNames);
+        ((DefaultTableModel)suborderTable.getModel()).setDataVector(getAssocOrder().getDataVector(), columnNames);
     }
 
     private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_modifyButtonActionPerformed
     {//GEN-HEADEREND:event_modifyButtonActionPerformed
-        // TODO add your handling code here:
+        int index = suborderTable.getSelectedRow();
+        int count = countSpinner.getIntValue();
+        assocOrder.setOrderCount(index, count);
+        updateSuborderTable();
     }//GEN-LAST:event_modifyButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_deleteButtonActionPerformed
     {//GEN-HEADEREND:event_deleteButtonActionPerformed
         int row = suborderTable.getSelectedRow();
         getAssocOrder().deleteOrder(row);
-        updateTable();
+        updateSuborderTable();
     }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
-    {//GEN-HEADEREND:event_formWindowClosing
-       //Set the name of the order
-        getAssocOrder().setName(nameField.getText());
-    }//GEN-LAST:event_formWindowClosing
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {//GEN-HEADEREND:event_okButtonActionPerformed
-        this.dispose();
+        //Set the name of the order
+       assocOrder.setName(nameField.getText());
+       this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 
     private Order assocOrder = new Order();

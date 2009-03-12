@@ -39,7 +39,7 @@ public class BookViewTable extends JTable implements Serializable
 
     public void setLibrary(Library library)
     {
-        DefaultTableModel model = new DefaultTableModel(library.getData(), columnNames);
+        DefaultTableModel model = new DefaultTableModel(library.getDataVector(), columnNames);
         setModel(model);
         //Active the row sorter (also filterer)
         sorter = new TableRowSorter<DefaultTableModel>(model);
@@ -215,7 +215,7 @@ public class BookViewTable extends JTable implements Serializable
      */
     public void updateData(Library library)
     {
-        ((DefaultTableModel) getModel()).setDataVector(library.getData(), columnNames);
+        ((DefaultTableModel) getModel()).setDataVector(library.getDataVector(), columnNames);
     }
 
     /** This method is called from within the constructor to

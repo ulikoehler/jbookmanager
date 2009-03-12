@@ -33,7 +33,7 @@ public class OrderManagerFrame extends javax.swing.JFrame
 
     public void updateData(OrderManager manager)
     {
-        ((StaticTableModel) orderViewTable.getModel()).setDataVector(manager.getOrders(), tableColumnNames);
+        ((StaticTableModel) orderViewTable.getModel()).setDataVector(manager.getDataVector(), tableColumnNames);
     }
 
     /**
@@ -115,6 +115,7 @@ public class OrderManagerFrame extends javax.swing.JFrame
     {//GEN-HEADEREND:event_deleteOrderButtonActionPerformed
         int index = orderViewTable.getSelectedRow();
         LibraryManager.library.getOrderManager().removeOrder(index);
+        updateData(LibraryManager.library.getOrderManager());
     }//GEN-LAST:event_deleteOrderButtonActionPerformed
 
     private void newOrderButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_newOrderButtonActionPerformed
@@ -122,7 +123,7 @@ public class OrderManagerFrame extends javax.swing.JFrame
         EditOrderDialog dialog = new EditOrderDialog(this, true);
         dialog.setVisible(true);
         LibraryManager.library.getOrderManager().addOrder(dialog.getAssocOrder());
-        updateData(manager);
+        updateData(LibraryManager.library.getOrderManager());
     }//GEN-LAST:event_newOrderButtonActionPerformed
 
     private void editOrderButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editOrderButtonActionPerformed
@@ -132,6 +133,7 @@ public class OrderManagerFrame extends javax.swing.JFrame
         EditOrderDialog dialog = new EditOrderDialog(this, true, order);
         dialog.setVisible(true);
         LibraryManager.library.getOrderManager().setOrderAt(dialog.getAssocOrder(), index);
+        updateData(LibraryManager.library.getOrderManager());
     }//GEN-LAST:event_editOrderButtonActionPerformed
     private static final String[] tableColumnNames =
     {

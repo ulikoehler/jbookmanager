@@ -24,6 +24,11 @@ public class Order implements Serializable
         return name;
     }
 
+    public void setOrderCount(int index, int count)
+    {
+        data.elementAt(index).setCount(count);
+    }
+
     /**
      * @param name the name to set
      */
@@ -31,19 +36,21 @@ public class Order implements Serializable
     {
         this.name = name;
     }
+
     /**
-     * This is named AtomOrder because it's the order in particular
-     * and not dividable
+     * @return the data
      */
-    class AtomOrder
+    public Vector<AtomOrder> getData()
     {
-        public String bookTitle;
-        public int count;
-        public AtomOrder(String bookTitle, int count)
-        {
-            this.bookTitle = bookTitle;
-            this.count = count;
-        }
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Vector<AtomOrder> data)
+    {
+        this.data = data;
     }
 
     public Order()
@@ -53,32 +60,32 @@ public class Order implements Serializable
 
     public void addOrder(String bookTitle, int count)
     {
-        data.add(new AtomOrder(bookTitle, count));
+        getData().add(new AtomOrder(bookTitle, count));
     }
 
     public void deleteOrder(int index)
     {
-        data.remove(index);
+        getData().remove(index);
     }
 
     public double getPriceSum()
     {
         double sum = 0.0;
-        for(AtomOrder a : data)
+        for(AtomOrder a : getData())
         {
-            sum += a.count * LibraryManager.library.getBookByTitle(a.bookTitle).getPrice();
+            sum += a.getCount() * LibraryManager.library.getBookByTitle(a.getBookTitle()).getPrice();
         }
         return sum;
     }
 
-    public Object[][] getData()
+    public Object[][] getDataVector()
     {
-        Object[][] ret = new Object[data.size()][2];
-        for (int i = 0; i < data.size(); i++)
+        Object[][] ret = new Object[getData().size()][2];
+        for (int i = 0; i < getData().size(); i++)
         {
-            AtomOrder a = data.elementAt(i);
-            ret[i][0] = a.bookTitle;
-            ret[i][1] = a.count;
+            AtomOrder a = getData().elementAt(i);
+            ret[i][0] = a.getBookTitle();
+            ret[i][1] = a.getCount();
         }
         return ret;
     }

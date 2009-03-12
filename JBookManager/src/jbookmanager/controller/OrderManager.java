@@ -15,7 +15,7 @@ import java.util.Vector;
  */
 public class OrderManager implements Serializable
 {
-    public Vector<Order> orders;
+    private Vector<Order> orders;
 
     public OrderManager()
     {
@@ -24,33 +24,49 @@ public class OrderManager implements Serializable
 
     public void addOrder(Order order)
     {
-        orders.add(order);
+        getOrders().add(order);
     }
 
     public void removeOrder(int index)
     {
-        orders.remove(index);
+        getOrders().remove(index);
     }
 
     public Order getOrderAt(int index)
     {
-        return orders.elementAt(index);
+        return getOrders().elementAt(index);
     }
 
     public void setOrderAt(Order order, int index)
     {
-        orders.set(index, order);
+        getOrders().set(index, order);
     }
 
-    public Object[][] getOrders()
+    public Object[][] getDataVector()
     {
-        Object[][] ret = new Object[orders.size()][2];
-        for (int i = 0; i < orders.size(); i++)
+        Object[][] ret = new Object[getOrders().size()][2];
+        for (int i = 0; i < getOrders().size(); i++)
         {
-            Order o = orders.elementAt(i);
+            Order o = getOrders().elementAt(i);
             ret[i][0] = o.getName();
             ret[i][1] = o.getPriceSum();
         }
         return ret;
+    }
+
+    /**
+     * @return the orders
+     */
+    public Vector<Order> getOrders()
+    {
+        return orders;
+    }
+
+    /**
+     * @param orders the orders to set
+     */
+    public void setOrders(Vector<Order> orders)
+    {
+        this.orders = orders;
     }
 }
