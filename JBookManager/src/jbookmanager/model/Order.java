@@ -6,7 +6,6 @@ package jbookmanager.model;
 
 import java.io.Serializable;
 import java.util.Vector;
-import jbookmanager.model.LibraryManager;
 
 /**
  *
@@ -110,7 +109,7 @@ public class Order implements Serializable
     }
 
     /**
-     * Generates a 2-dimensional array of the data hold by this objet
+     * Generates a 2-dimensional array of the data hold by this object
      * @return The data array
      */
     public Object[][] getDataVector()

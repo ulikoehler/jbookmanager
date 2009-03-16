@@ -69,57 +69,10 @@ public class LibraryDOMReader
         return null;
 
     }
-    
-    /**
-     * Logs a message with level Level.TRACE if TRACE logging
-     * is enabled
-     * @param msg The message to log
-     */
-    private static void logTrace(String msg)
-    {
-        if (logger.isTraceEnabled())
-        {
-            logger.log(Level.TRACE, msg);
-        }
-    }
-
-    /**
-     * Sets the logger level to a specific value
-     * @param level The level to set the logger level to
-     */
-    private static void setLevel(Level level)
-    {
-        logger.setLevel(level);
-    }
-    /**
-     * Logs a message with level Level.DEBUG if DEBUG logging is enabled
-     * @param msg The message to log
-     */
-    private static void logDebug(String msg)
-    {
-        if (logger.isDebugEnabled())
-        {
-            logger.log(Level.DEBUG, msg);
-        }
-    }
-
-    
-
-    /**
-     * Logs a message with level Level.INFO if INFO logging is enabled
-     * @param msg The message to log
-     */
-    private static void logInfo(String msg)
-    {
-        if (logger.isInfoEnabled())
-        {
-            logger.log(Level.WARN, msg);
-        }
-    }
 
     private static Book getBook(Element bookElement)
     {
-        setLevel(Level.DEBUG);
+        Logging.setLevel(Level.DEBUG);
         Book ret = new Book(); //Returned at the end
         ret.setIsbn(bookElement.getAttribute("isbn"));
         NodeList childNodes = bookElement.getChildNodes();
@@ -128,22 +81,22 @@ public class LibraryDOMReader
             Node node = childNodes.item(i);
             if (node.getNodeName().equals("title"))
             {
-                logDebug("Parsing title node with value: " + node.getTextContent());
+                Logging.logDebug("Parsing title node with value: " + node.getTextContent());
                 ret.setTitle(node.getTextContent());
             }
             if (node.getNodeName().equals("price"))
             {
-                logDebug("Parsing price node with value: " + node.getTextContent());
+                Logging.logDebug("Parsing price node with value: " + node.getTextContent());
                 ret.setPrice(Double.parseDouble(node.getTextContent()));
             }
             if (node.getNodeName().equals("count"))
             {
-                logDebug("Parsing count node with value: " + node.getTextContent());
+                Logging.logDebug("Parsing count node with value: " + node.getTextContent());
                 ret.setCount(Integer.parseInt(node.getTextContent()));
             }
             if (node.getNodeName().equals("comment"))
             {
-                logDebug("Parsing comment with value: " + node.getTextContent());
+                Logging.logDebug("Parsing comment with value: " + node.getTextContent());
                 ret.setComment(node.getNodeValue());
             }
         }

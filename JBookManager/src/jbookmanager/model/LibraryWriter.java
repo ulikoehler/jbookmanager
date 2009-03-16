@@ -48,7 +48,7 @@ public class LibraryWriter
             StreamResult streamResult = new StreamResult(out);
             SAXTransformerFactory tf =
                     (SAXTransformerFactory) SAXTransformerFactory.newInstance();
-            // SAX2.0 ContentHandler.
+            //SAX 2.0 ContentHandler
             TransformerHandler th = tf.newTransformerHandler();
             Transformer serializer = th.getTransformer();
             serializer.setOutputProperty(OutputKeys.ENCODING, "UTF8");
