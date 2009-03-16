@@ -28,7 +28,7 @@
     <xsd:element name="books">
         <xsd:complexType>
             <xsd:sequence maxOccurs="1">
-                <xsd:element name="newElement" type="book" maxOccurs="unbounded"></xsd:element>
+                <xsd:element name="book" type="book" maxOccurs="unbounded"></xsd:element>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
@@ -38,6 +38,7 @@
                 <xsd:element ref="books" minOccurs="0"/>
                 <xsd:element ref="orders" minOccurs="0"/>
             </xsd:sequence>
+            <xsd:anyAttribute/>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="orders">

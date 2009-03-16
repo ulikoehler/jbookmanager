@@ -45,23 +45,19 @@ public class LibraryWriter
             AttributesImpl emptyAtts = new AttributesImpl();
             AttributesImpl atts = new AttributesImpl();
             //Write the XSD stylesheet reference
-            atts.addAttribute("", "", "xmlns:xsi", "CDATA", "http://www.w3.org/2001/XMLSchema");
-            atts.addAttribute("", "", "xsi:noNamespaceSchemaLocation", "CDATA", "Libary.xsd");
-
-            th.startElement("", "", "confguration", atts);
-            th.endElement("", "", "confguration");
+            //atts.addAttribute("", "", "xmlns:xsi", "CDATA", "http://www.w3.org/2001/XMLSchema");
+            //atts.addAttribute("", "", "xsi:noNamespaceSchemaLocation", "CDATA", "Library.xsd");
             
-            th.startElement("", "", "library", emptyAtts);
+            th.startElement("", "", "library", emptyAtts); //Root element with schema declarations
             //Write all books
             th.startElement("","","books", emptyAtts);
             for (Book b : library.getBooks())
             {
-                System.out.println(b.getTitle());
                 atts.clear();
                 atts.addAttribute("", "", "isbn", "CDATA", b.getIsbn());
                 th.startElement("", "", "book", atts);
                     //Title
-                    th.startElement("", "", "titlee", emptyAtts);
+                    th.startElement("", "", "title", emptyAtts);
                         char[] title = b.getTitle().toCharArray();
                         th.characters(title, 0, title.length);
                     th.endElement("", "", "title");

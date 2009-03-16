@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import javax.swing.JOptionPane;
-import jbookmanager.controller.LibraryManager;
+import jbookmanager.model.LibraryManager;
 import jbookmanager.model.AmazonBookInfo;
 import jbookmanager.model.Book;
 

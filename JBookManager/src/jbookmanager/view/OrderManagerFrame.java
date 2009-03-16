@@ -11,9 +11,9 @@
 package jbookmanager.view;
 
 import java.util.ResourceBundle;
-import jbookmanager.controller.LibraryManager;
+import jbookmanager.model.LibraryManager;
 import jbookmanager.controller.StaticTableModel;
-import jbookmanager.controller.OrderManager;
+import jbookmanager.model.OrderManager;
 import jbookmanager.model.Order;
 
 /**

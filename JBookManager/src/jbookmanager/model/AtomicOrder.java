@@ -1,6 +1,6 @@
 package jbookmanager.model;
 
-import jbookmanager.controller.LibraryManager;
+import jbookmanager.model.LibraryManager;
 
 /**
  * This is named AtomicOrder because it's the order in particular

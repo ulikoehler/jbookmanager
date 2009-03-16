@@ -10,6 +10,7 @@
  */
 package jbookmanager.view;
 
+import jbookmanager.model.LibraryManager;
 import jbookmanager.controller.*;
 import jbookmanager.view.*;
 import java.io.Serializable;

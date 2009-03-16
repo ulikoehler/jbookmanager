@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
-import jbookmanager.controller.LibraryManager;
-import jbookmanager.controller.OrderManager;
+import jbookmanager.model.LibraryManager;
+import jbookmanager.model.OrderManager;
 
 /**
  *

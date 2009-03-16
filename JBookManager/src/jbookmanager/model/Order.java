@@ -6,7 +6,7 @@ package jbookmanager.model;
 
 import java.io.Serializable;
 import java.util.Vector;
-import jbookmanager.controller.LibraryManager;
+import jbookmanager.model.LibraryManager;
 
 /**
  *

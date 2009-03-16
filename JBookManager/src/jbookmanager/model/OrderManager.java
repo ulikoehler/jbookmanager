@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jbookmanager.controller;
+package jbookmanager.model;
 
+import jbookmanager.model.LibraryManager;
 import java.io.Serializable;
 import jbookmanager.model.*;
 import java.util.Vector;

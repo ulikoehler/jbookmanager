@@ -13,7 +13,7 @@ package jbookmanager.view;
 import java.util.ResourceBundle;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
-import jbookmanager.controller.LibraryManager;
+import jbookmanager.model.LibraryManager;
 import jbookmanager.controller.StaticTableModel;
 import jbookmanager.model.Order;
 
