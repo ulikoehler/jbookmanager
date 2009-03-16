@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
  */
 public class Book implements Serializable
 {
+
     private String isbn;
     private String title;
     private String comment;
@@ -20,6 +21,53 @@ public class Book implements Serializable
     private double price;
     private int count;
     private static Logger logger = Logger.getLogger(Book.class);
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 71 * hash + (this.isbn != null ? this.isbn.hashCode() : 0);
+        hash = 71 * hash + (this.title != null ? this.title.hashCode() : 0);
+        hash = 71 * hash + (this.comment != null ? this.comment.hashCode() : 0);
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+        hash = 71 * hash + this.count;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final Book other = (Book) obj;
+        if ((this.isbn == null) ? (other.isbn != null) : !this.isbn.equals(other.isbn))
+        {
+            return false;
+        }
+        if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title))
+        {
+            return false;
+        }
+        if ((this.comment == null) ? (other.comment != null) : !this.comment.equals(other.comment))
+        {
+            return false;
+        }
+        if (this.price != other.price)
+        {
+            return false;
+        }
+        if (this.count != other.count)
+        {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * @return the isbn
@@ -129,7 +177,7 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-        if(logger.isInfoEnabled())
+        if (logger.isInfoEnabled())
         {
             logger.info("Changed price of book '" + title + "' from '" + this.price + "' to '" + price + "'");
         }

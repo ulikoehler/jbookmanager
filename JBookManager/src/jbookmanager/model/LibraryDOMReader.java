@@ -5,6 +5,7 @@
 package jbookmanager.model;
 
 import java.io.IOException;
+import java.io.InputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -23,9 +24,14 @@ import org.xml.sax.SAXException;
 public class LibraryDOMReader
 {
 
-    private Logger logger = Logger.getLogger(LibraryDOMReader.class.getName());
+    private static Logger logger = Logger.getLogger(LibraryDOMReader.class.getName());
 
-    private Library parseXMLLibrary(String filename)
+    /**
+     * Reads a Library from a XML file
+     * @param inputSource
+     * @return
+     */
+    public static Library parseXMLLibrary(InputStream inputSource) throws IOException
     {
         try
         {
@@ -35,25 +41,24 @@ public class LibraryDOMReader
              */
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse("employees.xml");
+            Document doc = db.parse(inputSource);
             /**
              * Gather the data
              */
             Element root = doc.getDocumentElement();
             //Parse the books
             NodeList bookList = root.getElementsByTagName("book");
-            for(int i = 0; i < bookList.getLength(); i++)
+            for (int i = 0; i < bookList.getLength(); i++)
             {
-                ret.addBook(getBook(bookList.item(i)));
+                ret.addBook(getBook((Element) bookList.item(i)));
             }
+            //Parse the orders
             //TODO implement order parsing
             NodeList orderList = root.getElementsByTagName("order");
+            //Return the populated library
+            return ret;
         }
         catch (SAXException ex)
-        {
-            logger.log(Level.ERROR, null, ex);
-        }
-        catch (IOException ex)
         {
             logger.log(Level.ERROR, null, ex);
         }
@@ -61,11 +66,60 @@ public class LibraryDOMReader
         {
             logger.log(Level.ERROR, null, ex);
         }
+        return null;
 
     }
-
-    private static Book getBook(Node bookElement)
+    
+    /**
+     * Logs a message with level Level.TRACE if TRACE logging
+     * is enabled
+     * @param msg The message to log
+     */
+    private static void logTrace(String msg)
     {
+        if (logger.isTraceEnabled())
+        {
+            logger.log(Level.TRACE, msg);
+        }
+    }
+
+    /**
+     * Sets the logger level to a specific value
+     * @param level The level to set the logger level to
+     */
+    private static void setLevel(Level level)
+    {
+        logger.setLevel(level);
+    }
+    /**
+     * Logs a message with level Level.DEBUG if DEBUG logging is enabled
+     * @param msg The message to log
+     */
+    private static void logDebug(String msg)
+    {
+        if (logger.isDebugEnabled())
+        {
+            logger.log(Level.DEBUG, msg);
+        }
+    }
+
+    
+
+    /**
+     * Logs a message with level Level.INFO if INFO logging is enabled
+     * @param msg The message to log
+     */
+    private static void logInfo(String msg)
+    {
+        if (logger.isInfoEnabled())
+        {
+            logger.log(Level.WARN, msg);
+        }
+    }
+
+    private static Book getBook(Element bookElement)
+    {
+        setLevel(Level.DEBUG);
         Book ret = new Book(); //Returned at the end
         ret.setIsbn(bookElement.getAttribute("isbn"));
         NodeList childNodes = bookElement.getChildNodes();
@@ -74,18 +128,22 @@ public class LibraryDOMReader
             Node node = childNodes.item(i);
             if (node.getNodeName().equals("title"))
             {
-                ret.setTitle(node.getNodeValue());
+                logDebug("Parsing title node with value: " + node.getTextContent());
+                ret.setTitle(node.getTextContent());
             }
             if (node.getNodeName().equals("price"))
             {
-                ret.setPrice(Double.parseDouble(node.getNodeValue()));
+                logDebug("Parsing price node with value: " + node.getTextContent());
+                ret.setPrice(Double.parseDouble(node.getTextContent()));
             }
             if (node.getNodeName().equals("count"))
             {
-                ret.setCount(Integer.parseInt(node.getNodeValue()));
+                logDebug("Parsing count node with value: " + node.getTextContent());
+                ret.setCount(Integer.parseInt(node.getTextContent()));
             }
             if (node.getNodeName().equals("comment"))
             {
+                logDebug("Parsing comment with value: " + node.getTextContent());
                 ret.setComment(node.getNodeValue());
             }
         }

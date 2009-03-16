@@ -15,8 +15,36 @@ import java.util.Vector;
  */
 public class OrderManager implements Serializable
 {
-
     private Vector<Order> orders;
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 83 * hash + (this.orders != null ? this.orders.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final OrderManager other = (OrderManager) obj;
+        if (this.orders != other.orders && (this.orders == null || !this.orders.equals(other.orders)))
+        {
+            return false;
+        }
+        return true;
+    }
+
+
 
     public OrderManager()
     {

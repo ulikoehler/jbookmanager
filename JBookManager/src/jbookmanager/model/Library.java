@@ -8,8 +8,6 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
-import jbookmanager.model.LibraryManager;
-import jbookmanager.model.OrderManager;
 
 /**
  *
@@ -20,6 +18,42 @@ public class Library implements Serializable
 
     private Vector<Book> books;
     private OrderManager orderManager = new OrderManager();
+
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 41 * hash + (this.books != null ? this.books.hashCode() : 0);
+        hash = 41 * hash + (this.orderManager != null ? this.orderManager.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final Library other = (Library) obj;
+        if (this.books != other.books && (this.books == null || !this.books.equals(other.books)))
+        {
+            return false;
+        }
+        if (this.orderManager != other.orderManager &&
+                (this.orderManager == null || !this.orderManager.equals(other.orderManager)))
+        {
+            return false;
+        }
+        return true;
+    }
+
+
 
 
     public Library()
