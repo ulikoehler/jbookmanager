@@ -6,6 +6,7 @@ package jbookmanager.model;
 
 import java.io.Serializable;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
 
 /**
  *
@@ -39,31 +40,59 @@ public class Book implements Serializable
     {
         if (obj == null)
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): Argument is null");
+                    }
             return false;
         }
         if (getClass() != obj.getClass())
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): Class types do not match");
+                    }
             return false;
         }
         final Book other = (Book) obj;
         if ((this.isbn == null) ? (other.isbn != null) : !this.isbn.equals(other.isbn))
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): ISBNs do not match");
+                    }
             return false;
         }
         if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title))
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): ISBNs do not match");
+                    }
             return false;
         }
         if ((this.comment == null) ? (other.comment != null) : !this.comment.equals(other.comment))
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): Comments do not match");
+                    }
             return false;
         }
         if (this.price != other.price)
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): Prices do not match");
+                    }
             return false;
         }
         if (this.count != other.count)
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): Counts do not match");
+                    }
             return false;
         }
         return true;
@@ -85,10 +114,6 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-//        if(logger.isInfoEnabled())
-//        {
-//            logger.info("Changed ISBN of book '" + title + "' from '" + this.isbn + "' to '" + isbn + "'");
-//        }
         this.isbn = isbn;
     }
 
@@ -108,10 +133,6 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-//        if(logger.isInfoEnabled())
-//        {
-//            logger.info("Changed book title from '" + this.title + "' to '" + title + "'");
-//        }
         this.title = title;
     }
 
@@ -131,10 +152,6 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-//        if(logger.isInfoEnabled())
-//        {
-//            logger.info("Changed comment of book '" + title + "' from '" + this.comment + "' to '" + comment + "'");
-//        }
         this.comment = comment;
     }
 
@@ -154,10 +171,6 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-//        if(logger.isInfoEnabled())
-//        {
-//            logger.info("Changed count of book '" + title + "' from '" + this.count + "' to '" + count + "'");
-//        }
         this.count = count;
     }
 
@@ -177,10 +190,6 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-        if (logger.isInfoEnabled())
-        {
-            logger.info("Changed price of book '" + title + "' from '" + this.price + "' to '" + price + "'");
-        }
         this.price = price;
     }
 }

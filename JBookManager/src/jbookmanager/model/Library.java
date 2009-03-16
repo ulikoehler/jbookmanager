@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
 
 /**
  *
@@ -18,7 +20,7 @@ public class Library implements Serializable
 
     private Vector<Book> books;
     private OrderManager orderManager = new OrderManager();
-
+    private static Logger logger = Logger.getLogger(Library.class);
 
     @Override
     public int hashCode()
@@ -34,16 +36,45 @@ public class Library implements Serializable
     {
         if (obj == null)
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): Argument is null");
+                    }
             return false;
         }
         if (getClass() != obj.getClass())
         {
+            if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): Class types do not match");
+                    }
             return false;
         }
         final Library other = (Library) obj;
+        //Compare the book array
         if (this.books != other.books && (this.books == null || !this.books.equals(other.books)))
         {
-            return false;
+            for (Book book : books)
+            {
+                boolean state = false; //True if two books matched
+                for (Book otherBook : other.books)
+                {
+                    if (book.equals(otherBook))
+                    {
+                        state = true;
+                    }
+                }
+                //If state == true, continue
+                if (!state)
+                {
+                    if (logger.isDebugEnabled())
+                    {
+                        logger.log(Level.DEBUG, "equals(): Book with ISBN " + book.getIsbn() +
+                                " doesn't match any book in the other Library instance.");
+                    }
+                    return false;
+                }
+            }
         }
         if (this.orderManager != other.orderManager &&
                 (this.orderManager == null || !this.orderManager.equals(other.orderManager)))
@@ -52,9 +83,6 @@ public class Library implements Serializable
         }
         return true;
     }
-
-
-
 
     public Library()
     {

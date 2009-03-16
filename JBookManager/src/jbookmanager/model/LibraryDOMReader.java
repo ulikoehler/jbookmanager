@@ -48,9 +48,17 @@ public class LibraryDOMReader
             Element root = doc.getDocumentElement();
             //Parse the books
             NodeList bookList = root.getElementsByTagName("book");
-            for (int i = 0; i < bookList.getLength(); i++)
+
+            int i = 0;
+            for (; i < bookList.getLength(); i++)
             {
                 ret.addBook(getBook((Element) bookList.item(i)));
+
+            }
+            //Log how many books have been read
+            if (logger.isDebugEnabled())
+            {
+                logger.log(Level.DEBUG, "parseXMLLibrary(): Read " + i + " books");
             }
             //Parse the orders
             //TODO implement order parsing
@@ -72,31 +80,59 @@ public class LibraryDOMReader
 
     private static Book getBook(Element bookElement)
     {
-        Logging.setLevel(Level.DEBUG);
+        logger.setLevel(Level.DEBUG);
         Book ret = new Book(); //Returned at the end
+        //Set the ISBN
+        if (logger.isDebugEnabled())
+        {
+            logger.log(Level.DEBUG, "Parsing ISBN attribute with value: " + bookElement.getAttribute("isbn"));
+        }
         ret.setIsbn(bookElement.getAttribute("isbn"));
+        /**
+         * Iterate over the children to get all other attributes
+         */
         NodeList childNodes = bookElement.getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++)
         {
             Node node = childNodes.item(i);
             if (node.getNodeName().equals("title"))
             {
-                Logging.logDebug("Parsing title node with value: " + node.getTextContent());
+                //Log a debugging message if enabled
+                if (logger.isDebugEnabled())
+                {
+                    logger.log(Level.DEBUG, "Parsing title node with value: " + node.getTextContent());
+                }
+                //Save the data in the Book object
                 ret.setTitle(node.getTextContent());
             }
             if (node.getNodeName().equals("price"))
             {
-                Logging.logDebug("Parsing price node with value: " + node.getTextContent());
+                //Log a debugging message if enabled
+                if (logger.isDebugEnabled())
+                {
+                    logger.log(Level.DEBUG, "Parsing price node with value: " + node.getTextContent());
+                }
+                //Save the data in the Book object
                 ret.setPrice(Double.parseDouble(node.getTextContent()));
             }
             if (node.getNodeName().equals("count"))
             {
-                Logging.logDebug("Parsing count node with value: " + node.getTextContent());
+                //Log a debugging message if enabled
+                if (logger.isDebugEnabled())
+                {
+                    logger.log(Level.DEBUG, "Parsing count node with value: " + node.getTextContent());
+                }
+                //Save the data in the Book object
                 ret.setCount(Integer.parseInt(node.getTextContent()));
             }
             if (node.getNodeName().equals("comment"))
             {
-                Logging.logDebug("Parsing comment with value: " + node.getTextContent());
+                //Log a debugging message if enabled
+                if (logger.isDebugEnabled())
+                {
+                    logger.log(Level.DEBUG, "Parsing comment with value: " + node.getTextContent());
+                }
+                //Save the data in the Book object
                 ret.setComment(node.getNodeValue());
             }
         }

@@ -30,7 +30,7 @@ public class LibraryIOTest
     /**
      * Options
      */
-    private static final boolean deleteFile = false; //If true, delete the output file after the tests
+    private static final boolean deleteFile = true; //If true, delete the output file after the tests
 
     public LibraryIOTest()
     {
@@ -54,7 +54,7 @@ public class LibraryIOTest
          */
         library = new Library();
         Book b1 = new Book();
-        b1.setIsbn("978-24733333354");
+        b1.setIsbn("978-2473333354");
         b1.setTitle("Just a test book");
         b1.setPrice(109.22);
         b1.setCount(5);
@@ -97,7 +97,7 @@ public class LibraryIOTest
                     openStream()));
             //Reread the exported library and compare with the original one
             Library rereadLibrary = LibraryDOMReader.parseXMLLibrary(new FileInputStream("test.xml"));
-            Assert.assertEquals("Reread library data is not equal to the original data!", library, rereadLibrary);
+            Assert.assertEquals("Libraries are not equal", library, rereadLibrary);
         }
         catch (SAXException ex)
         {
