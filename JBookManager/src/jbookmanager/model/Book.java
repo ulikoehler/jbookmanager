@@ -37,10 +37,10 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-        if(logger.isInfoEnabled())
-        {
-            logger.info("Changed ISBN of book '" + title + "' from '" + this.isbn + "' to '" + isbn + "'");
-        }
+//        if(logger.isInfoEnabled())
+//        {
+//            logger.info("Changed ISBN of book '" + title + "' from '" + this.isbn + "' to '" + isbn + "'");
+//        }
         this.isbn = isbn;
     }
 
@@ -60,10 +60,10 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-        if(logger.isInfoEnabled())
-        {
-            logger.info("Changed book title from '" + this.title + "' to '" + title + "'");
-        }
+//        if(logger.isInfoEnabled())
+//        {
+//            logger.info("Changed book title from '" + this.title + "' to '" + title + "'");
+//        }
         this.title = title;
     }
 
@@ -83,10 +83,10 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-        if(logger.isInfoEnabled())
-        {
-            logger.info("Changed comment of book '" + title + "' from '" + this.comment + "' to '" + comment + "'");
-        }
+//        if(logger.isInfoEnabled())
+//        {
+//            logger.info("Changed comment of book '" + title + "' from '" + this.comment + "' to '" + comment + "'");
+//        }
         this.comment = comment;
     }
 
@@ -106,10 +106,10 @@ public class Book implements Serializable
         /**
          * Log the change
          */
-        if(logger.isInfoEnabled())
-        {
-            logger.info("Changed count of book '" + title + "' from '" + this.count + "' to '" + count + "'");
-        }
+//        if(logger.isInfoEnabled())
+//        {
+//            logger.info("Changed count of book '" + title + "' from '" + this.count + "' to '" + count + "'");
+//        }
         this.count = count;
     }
 

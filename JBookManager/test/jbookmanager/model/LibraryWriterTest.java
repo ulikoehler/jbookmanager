@@ -71,7 +71,7 @@ public class LibraryWriterTest
         {
             System.out.println("writeLibrary");
             String file = "test.xml";
-            LibraryWriter.writeLibrary(library, file);
+            LibraryWriter.writeLibraryPlain(library, file);
             //Validate the XML file
             LibraryManager.validateXML("test.xml", new StreamSource(ClassLoader.getSystemResource("Library.xsd").openStream()));
         }

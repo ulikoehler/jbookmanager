@@ -4,9 +4,13 @@
  */
 package jbookmanager.model;
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.zip.GZIPOutputStream;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -24,14 +28,23 @@ import org.xml.sax.helpers.AttributesImpl;
  */
 public class LibraryWriter
 {
+    public static void writeCompressedLibrary(Library library, String file) throws IOException
+    {
+        writeLibraryInternal(library,  new BufferedOutputStream(new GZIPOutputStream(new FileOutputStream(file))));
+    }
 
-    public static void writeLibrary(Library library, String file)
+    public static void writeLibraryPlain(Library library, String filename) throws IOException
+    {
+        writeLibraryInternal(library, new BufferedOutputStream(new FileOutputStream(filename)));
+    }
+
+    private static void writeLibraryInternal(Library library, OutputStream fout)
     {
         // PrintWriter from a Servlet
         PrintWriter out = null;
         try
         {
-            out = new PrintWriter(new FileOutputStream(file));//new BufferedOutputStream(new GZIPOutputStream(new FileOutputStream(file))));
+            out = new PrintWriter(fout);//;
             StreamResult streamResult = new StreamResult(out);
             SAXTransformerFactory tf =
                     (SAXTransformerFactory) SAXTransformerFactory.newInstance();
@@ -44,10 +57,6 @@ public class LibraryWriter
             th.startDocument();
             AttributesImpl emptyAtts = new AttributesImpl();
             AttributesImpl atts = new AttributesImpl();
-            //Write the XSD stylesheet reference
-            //atts.addAttribute("", "", "xmlns:xsi", "CDATA", "http://www.w3.org/2001/XMLSchema");
-            //atts.addAttribute("", "", "xsi:noNamespaceSchemaLocation", "CDATA", "Library.xsd");
-            
             th.startElement("", "", "library", emptyAtts); //Root element with schema declarations
             //Write all books
             th.startElement("","","books", emptyAtts);
@@ -91,14 +100,9 @@ public class LibraryWriter
         {
             Logger.getLogger(LibraryWriter.class.getName()).log(Level.ERROR, null, ex);
         }
-        catch (IOException ex)
-        {
-            Logger.getLogger(LibraryWriter.class.getName()).log(Level.ERROR, null, ex);
-        }
         finally
         {
             out.close();
         }
-
     }
 }
