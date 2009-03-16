@@ -1,7 +1,5 @@
 package jbookmanager.model;
 
-import jbookmanager.model.LibraryManager;
-
 /**
  * This is named AtomicOrder because it's the order in particular
  * and not dividable
