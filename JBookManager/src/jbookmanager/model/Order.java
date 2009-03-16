@@ -39,7 +39,7 @@ public class Order implements Serializable
     /**
      * @return the data
      */
-    public Vector<AtomOrder> getData()
+    public Vector<AtomicOrder> getData()
     {
         return data;
     }
@@ -47,19 +47,19 @@ public class Order implements Serializable
     /**
      * @param data the data to set
      */
-    public void setData(Vector<AtomOrder> data)
+    public void setData(Vector<AtomicOrder> data)
     {
         this.data = data;
     }
 
     public Order()
     {
-        data = new Vector<AtomOrder>();
+        data = new Vector<AtomicOrder>();
     }
 
     public void addOrder(String bookTitle, int count)
     {
-        getData().add(new AtomOrder(bookTitle, count));
+        getData().add(new AtomicOrder(bookTitle, count));
     }
 
     public void deleteOrder(int index)
@@ -70,7 +70,7 @@ public class Order implements Serializable
     public double getPriceSum()
     {
         double sum = 0.0;
-        for (AtomOrder a : getData())
+        for (AtomicOrder a : getData())
         {
             sum += a.getCount() * LibraryManager.library.getBookByTitle(a.getBookTitle()).getPrice();
         }
@@ -86,7 +86,7 @@ public class Order implements Serializable
         Object[][] ret = new Object[getData().size()][3];
         for (int i = 0; i < getData().size(); i++)
         {
-            AtomOrder a = getData().elementAt(i);
+            AtomicOrder a = getData().elementAt(i);
             ret[i][0] = a.getBookTitle();
             ret[i][1] = a.getCount();
             ret[i][2] = LibraryManager.currencyFormat.format(a.getCount() * LibraryManager.library.getBookByTitle(a.
@@ -95,5 +95,5 @@ public class Order implements Serializable
         return ret;
     }
     private String name;
-    private Vector<AtomOrder> data;
+    private Vector<AtomicOrder> data;
 }

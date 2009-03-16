@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xsd:element name="title" type="xsd:string"></xsd:element>
+    <xsd:element name="count" type="xsd:unsignedInt"></xsd:element>
+    <xsd:element name="comment" type="xsd:string"></xsd:element>
+    <xsd:complexType name="book">
+        <xsd:sequence>
+            <xsd:element ref="title"/>
+            <xsd:element ref="price"/>
+            <xsd:element ref="count"/>
+            <xsd:element ref="comment"/>
+        </xsd:sequence>
+        <xsd:attribute name="isbn" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:element name="price" type="xsd:double"></xsd:element>
+    <xsd:complexType name="order">
+        <xsd:sequence>
+            <xsd:element ref="atomicOrder" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:element name="atomicOrder">
+        <xsd:complexType>
+            <xsd:attribute name="isbn" type="xsd:string"/>
+            <xsd:attribute name="count" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="books">
+        <xsd:complexType>
+            <xsd:sequence maxOccurs="1">
+                <xsd:element name="newElement" type="book" maxOccurs="unbounded"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="library">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="books" minOccurs="0"/>
+                <xsd:element ref="orders" minOccurs="0"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="orders">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="newElement" type="order" maxOccurs="unbounded"></xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
