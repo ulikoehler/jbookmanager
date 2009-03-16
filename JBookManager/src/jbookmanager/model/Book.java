@@ -23,6 +23,20 @@ public class Book implements Serializable
     private int count;
     private static Logger logger = Logger.getLogger(Book.class);
 
+    public Book()
+    {
+        
+    }
+
+    public Book(String isbn, String title, String comment, double price, int count)
+    {
+        this.isbn = isbn;
+        this.title = title;
+        this.comment = comment;
+        this.price = price;
+        this.count = count;
+    }
+
     @Override
     public int hashCode()
     {
@@ -40,59 +54,59 @@ public class Book implements Serializable
     {
         if (obj == null)
         {
-            if (logger.isDebugEnabled())
-                    {
-                        logger.log(Level.DEBUG, "equals(): Argument is null");
-                    }
+            if (logger.isTraceEnabled())
+            {
+                logger.log(Level.TRACE, "equals(): Argument is null");
+            }
             return false;
         }
         if (getClass() != obj.getClass())
         {
-            if (logger.isDebugEnabled())
-                    {
-                        logger.log(Level.DEBUG, "equals(): Class types do not match");
-                    }
+            if (logger.isTraceEnabled())
+            {
+                logger.log(Level.TRACE, "equals(): Class types do not match");
+            }
             return false;
         }
         final Book other = (Book) obj;
         if ((this.isbn == null) ? (other.isbn != null) : !this.isbn.equals(other.isbn))
         {
-            if (logger.isDebugEnabled())
-                    {
-                        logger.log(Level.DEBUG, "equals(): ISBNs do not match");
-                    }
+            if (logger.isTraceEnabled())
+            {
+                logger.log(Level.TRACE, "equals(): ISBNs do not match");
+            }
             return false;
         }
         if ((this.title == null) ? (other.title != null) : !this.title.equals(other.title))
         {
-            if (logger.isDebugEnabled())
-                    {
-                        logger.log(Level.DEBUG, "equals(): ISBNs do not match");
-                    }
+            if (logger.isTraceEnabled())
+            {
+                logger.log(Level.TRACE, "equals(): ISBNs do not match");
+            }
             return false;
         }
         if ((this.comment == null) ? (other.comment != null) : !this.comment.equals(other.comment))
         {
-            if (logger.isDebugEnabled())
-                    {
-                        logger.log(Level.DEBUG, "equals(): Comments do not match");
-                    }
+            if(logger.isTraceEnabled())
+            {
+                logger.log(Level.TRACE, "equals(): Comments do not match");
+            }
             return false;
         }
         if (this.price != other.price)
         {
-            if (logger.isDebugEnabled())
-                    {
-                        logger.log(Level.DEBUG, "equals(): Prices do not match");
-                    }
+            if (logger.isTraceEnabled())
+            {
+                logger.log(Level.TRACE, "equals(): Prices do not match");
+            }
             return false;
         }
         if (this.count != other.count)
         {
-            if (logger.isDebugEnabled())
-                    {
-                        logger.log(Level.DEBUG, "equals(): Counts do not match");
-                    }
+            if (logger.isTraceEnabled())
+            {
+                logger.log(Level.TRACE, "equals(): Counts do not match");
+            }
             return false;
         }
         return true;

@@ -80,7 +80,6 @@ public class LibraryDOMReader
 
     private static Book getBook(Element bookElement)
     {
-        logger.setLevel(Level.DEBUG);
         Book ret = new Book(); //Returned at the end
         //Set the ISBN
         if (logger.isDebugEnabled())
@@ -133,7 +132,7 @@ public class LibraryDOMReader
                     logger.log(Level.DEBUG, "Parsing comment with value: " + node.getTextContent());
                 }
                 //Save the data in the Book object
-                ret.setComment(node.getNodeValue());
+                ret.setComment(node.getTextContent());
             }
         }
         return ret;
