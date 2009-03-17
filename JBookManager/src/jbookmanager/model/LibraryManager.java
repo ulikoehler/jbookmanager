@@ -3,24 +3,14 @@
  */
 package jbookmanager.model;
 
-import jbookmanager.model.*;
-import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.NumberFormat;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -41,7 +31,7 @@ public abstract class LibraryManager
     /**
      * Validates the XML document against the XSD stylesheet
      * @param documentFilename The name of the XML file
-     * @param stylesheetFilename The name of the XSD stylesheet file
+     * @param stylesheetSource The source to read the stylesheet from
      * @throws SAXException
      * @throws IOException
      * @throws ParserConfigurationException 
@@ -75,56 +65,26 @@ public abstract class LibraryManager
 
     public static Library readLibrary(String file) throws FileNotFoundException
     {
-        InputStream fin = null;
         try
         {
-            fin = new GZIPInputStream(new FileInputStream(file));
-            XMLDecoder dec = new XMLDecoder(fin);
-            dec.close();
-            return (Library) dec.readObject();
+            return LibraryDOMReader.readLibrary(file);
         }
         catch (IOException ex)
         {
             logger.log(Level.ERROR, null, ex);
-        }
-        finally
-        {
-            try
-            {
-                fin.close();
-            }
-            catch (IOException ex)
-            {
-                logger.log(Level.ERROR, null, ex);
-            }
         }
         return null;
     }
 
     public static void writeLibrary(Library lib, String file)
     {
-        OutputStream fout = null;
         try
         {
-            fout = new GZIPOutputStream(new FileOutputStream(file));
-            XMLEncoder enc = new XMLEncoder(fout);
-            enc.writeObject(lib);
-            enc.close();
+            LibraryWriter.writeCompressedLibrary(library, file);
         }
         catch (IOException ex)
         {
             logger.log(Level.ERROR, null, ex);
-        }
-        finally
-        {
-            try
-            {
-                fout.close();
-            }
-            catch (IOException ex)
-            {
-                logger.log(Level.ERROR, null, ex);
-            }
         }
     }
 

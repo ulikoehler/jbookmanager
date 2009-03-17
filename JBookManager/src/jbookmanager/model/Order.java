@@ -88,9 +88,15 @@ public class Order implements Serializable
         data = new Vector<AtomicOrder>();
     }
 
-    public void addOrder(String bookTitle, int count)
+    public Order(String name)
     {
-        getData().add(new AtomicOrder(bookTitle, count));
+        data = new Vector<AtomicOrder>();
+        this.name = name;
+    }
+
+    public void addAtomicOrder(String isbn, int count)
+    {
+        data.add(new AtomicOrder(isbn, count));
     }
 
     public void deleteOrder(int index)

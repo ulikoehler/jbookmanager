@@ -29,7 +29,7 @@ public class LibraryWriter
 {
     public static void writeCompressedLibrary(Library library, String file) throws IOException
     {
-        writeLibraryInternal(library,  new BufferedOutputStream(new GZIPOutputStream(new FileOutputStream(file))));
+        writeLibraryInternal(library, new BufferedOutputStream(new GZIPOutputStream(new FileOutputStream(file))));
     }
 
     public static void writeLibraryPlain(Library library, String filename) throws IOException
@@ -88,6 +88,24 @@ public class LibraryWriter
                 th.endElement("", "", "book");
             }
             th.endElement("", "", "books");
+            //Write all orders
+            th.startElement("", "", "orders", emptyAtts);
+            for(Order o : library.getOrderManager().getOrders())
+            {
+                atts.clear();
+                atts.addAttribute("", "", "name", "CDATA", o.getName());
+                th.startElement("", "", "order", atts);
+                    for(AtomicOrder a : o.getData())
+                    {
+                        atts.clear();
+                        atts.addAttribute("", "", "isbn", "CDATA", a.getBookISBN());
+                        atts.addAttribute("", "", "count", "CDATA", Integer.toString(a.getCount()));
+                        th.startElement("", "", "atomicOrder", atts);
+                        th.endElement("", "", "atomicOrder");
+                    }
+                th.endElement("", "", "order");
+            }
+            th.endElement("", "", "orders");
             th.endElement("", "", "library");
             th.endDocument();
         }

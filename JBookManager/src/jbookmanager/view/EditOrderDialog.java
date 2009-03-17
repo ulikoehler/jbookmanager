@@ -199,7 +199,7 @@ public class EditOrderDialog extends javax.swing.JDialog
     {//GEN-HEADEREND:event_addButtonActionPerformed
         String bookTitle = (String) bookTitleList.getSelectedValue();
         int count = countSpinner.getIntValue();
-        getAssocOrder().addOrder(bookTitle, count);
+        getAssocOrder().addAtomicOrder(LibraryManager.library.getBookByTitle(bookTitle).getIsbn(), count);
         updateSuborderTable();
     }//GEN-LAST:event_addButtonActionPerformed
 

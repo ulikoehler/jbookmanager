@@ -60,6 +60,7 @@ public class LibraryIOTest
         b1.setCount(5);
         b1.setComment("This is just a test book");
         library.addBook(b1);
+        
         Book b2 = new Book();
         b2.setIsbn("978-12345678905");
         b2.setTitle("Just Another test book");
@@ -67,6 +68,19 @@ public class LibraryIOTest
         b2.setCount(6);
         b2.setComment("This is yet another test book");
         library.addBook(b2);
+        /**
+         * Add some test orders to the library
+         */
+        OrderManager orderManager = new OrderManager();
+        Order testOrder1 = new Order("Test order");
+            testOrder1.addAtomicOrder("978-12345678905", 157);
+        orderManager.addOrder(testOrder1);
+        Order testOrder2 = new Order("Test order 2");
+            testOrder2.addAtomicOrder("978-12345678905", 157);
+            testOrder2.addAtomicOrder("978-2473333354", 1041);
+        orderManager.addOrder(testOrder2);
+        library.setOrderManager(orderManager);
+
     }
 
     @After

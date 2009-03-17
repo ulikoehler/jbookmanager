@@ -9,48 +9,14 @@ public class AtomicOrder
     private String bookISBN;
     private int count;
 
-    @Override
-    public int hashCode()
-    {
-        int hash = 7;
-        hash = 97 * hash + (this.bookISBN != null ? this.bookISBN.hashCode() : 0);
-        hash = 97 * hash + this.count;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        final AtomicOrder other = (AtomicOrder) obj;
-        if ((this.bookISBN == null) ? (other.bookISBN != null) : !this.bookISBN.equals(other.bookISBN))
-        {
-            return false;
-        }
-        if (this.count != other.count)
-        {
-            return false;
-        }
-        return true;
-    }
-
-
-
     public AtomicOrder()
     {
         
     }
 
-    public AtomicOrder(String bookTitle, int count)
+    public AtomicOrder(String isbn, int count)
     {
-        this.bookISBN = LibraryManager.library.getBookByTitle(bookTitle).getIsbn();
+        this.bookISBN = isbn;
         this.count = count;
     }
 
