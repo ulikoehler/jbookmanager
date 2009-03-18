@@ -9,9 +9,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.stream.StreamSource;
-import jbookmanager.model.LibraryManager;
 import junit.framework.Assert;
 import junit.framework.TestCase;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -27,6 +28,7 @@ public class LibraryIOTest
 {
 
     private Library library;
+    private static Logger logger = Logger.getLogger(LibraryIOTest.class);
     /**
      * Options
      */
@@ -105,12 +107,29 @@ public class LibraryIOTest
         {
             System.out.println("writeLibrary");
             String file = "test.xml";
+            //Write the XML
+            if(logger.isDebugEnabled())
+            {
+                logger.log(Level.DEBUG, "Exporting the library to XMl");
+            }
             LibraryWriter.writeLibraryPlain(library, file);
             //Validate the exported XML
+            if(logger.isDebugEnabled())
+            {
+                logger.log(Level.DEBUG, "Validating the XML file");
+            }
             LibraryManager.validateXML("test.xml", new StreamSource(ClassLoader.getSystemResource("Library.xsd").
                     openStream()));
             //Reread the exported library and compare with the original one
+            if(logger.isDebugEnabled())
+            {
+                logger.log(Level.DEBUG, "Reading in the library");
+            }
             Library rereadLibrary = LibraryDOMReader.parseXMLLibrary(new FileInputStream("test.xml"));
+            if(logger.isDebugEnabled())
+            {
+                logger.log(Level.DEBUG, "Test equality of the libraries");
+            }
             Assert.assertEquals("Libraries are not equal", library, rereadLibrary);
         }
         catch (SAXException ex)

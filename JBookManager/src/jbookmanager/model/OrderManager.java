@@ -42,7 +42,7 @@ public class OrderManager implements Serializable
         final OrderManager other = (OrderManager) obj;
         if (this.orders != other.orders && (this.orders == null || !this.orders.equals(other.orders)))
         {
-            for (Order order : orders)
+            for (Order order : this.orders)
             {
                 boolean state = false; //True if two books matched
                 for (Order otherOrder : other.orders)
@@ -57,8 +57,8 @@ public class OrderManager implements Serializable
                 {
                     if (logger.isTraceEnabled())
                     {
-                        logger.log(Level.TRACE, "equals(): The order named " + order.getName() +
-                                " doesn't match any order in the other Library instance.");
+                        logger.log(Level.TRACE, "equals(): The order named '" + order.getName() +
+                                "' doesn't match any order in the other OrderManager instance.");
                     }
                     return false;
                 }

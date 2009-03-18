@@ -30,27 +30,40 @@ public class Order implements Serializable
     {
         if (obj == null)
         {
+            if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): Argument is null");
+                    }
             return false;
         }
         if (getClass() != obj.getClass())
         {
+            if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): Class types do not match");
+                    }
             return false;
         }
         final Order other = (Order) obj;
         if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name))
         {
+            if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): Names do not match");
+                    }
             return false;
         }
         if (this.data != other.data && (this.data == null || !this.data.equals(other.data)))
         {
-            for (AtomicOrder order : data)
+            for (AtomicOrder atomicOrder : data)
             {
                 boolean state = false; //True if two books matched
-                for (AtomicOrder otherOrder : other.data)
+                for (AtomicOrder otherAtomicOrder : other.data)
                 {
-                    if (order.equals(otherOrder))
+                    if (atomicOrder.equals(otherAtomicOrder))
                     {
-                        state = true;break;
+                        state = true;
+                        break;
                     }
                 }
                 //If state == true, continue
@@ -58,8 +71,8 @@ public class Order implements Serializable
                 {
                     if (logger.isTraceEnabled())
                     {
-                        logger.log(Level.TRACE, "equals(): The atomic order referencing " + order.getBookISBN() +
-                                " doesn't match any atomic order in the other Library instance.");
+                        logger.log(Level.TRACE, "equals(): The atomic order referencing " + atomicOrder.getBookISBN() +
+                                " doesn't match any atomic order in the other Order instance.");
                     }
                     return false;
                 }

@@ -36,17 +36,17 @@ public class Library implements Serializable
     {
         if (obj == null)
         {
-            if (logger.isDebugEnabled())
+            if (logger.isTraceEnabled())
                     {
-                        logger.log(Level.DEBUG, "equals(): Argument is null");
+                        logger.log(Level.TRACE, "equals(): Argument is null");
                     }
             return false;
         }
         if (getClass() != obj.getClass())
         {
-            if (logger.isDebugEnabled())
+            if (logger.isTraceEnabled())
                     {
-                        logger.log(Level.DEBUG, "equals(): Class types do not match");
+                        logger.log(Level.TRACE, "equals(): Class types do not match");
                     }
             return false;
         }
@@ -67,9 +67,9 @@ public class Library implements Serializable
                 //If state == true, continue
                 if (!state)
                 {
-                    if (logger.isDebugEnabled())
+                    if (logger.isTraceEnabled())
                     {
-                        logger.log(Level.DEBUG, "equals(): Book with ISBN " + book.getIsbn() +
+                        logger.log(Level.TRACE, "equals(): Book with ISBN " + book.getIsbn() +
                                 " doesn't match any book in the other Library instance.");
                     }
                     return false;

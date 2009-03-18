@@ -1,5 +1,8 @@
 package jbookmanager.model;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 /**
  * This is named AtomicOrder because it's the order in particular
  * and not dividable
@@ -8,11 +11,62 @@ public class AtomicOrder
 {
     private String bookISBN;
     private int count;
+    private static Logger logger = Logger.getLogger(AtomicOrder.class);
 
     public AtomicOrder()
     {
         
     }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
+            if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): Argument is null");
+                    }
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): Class types do not match");
+                    }
+            return false;
+        }
+        final AtomicOrder other = (AtomicOrder) obj;
+        if ((this.bookISBN == null) ? (other.bookISBN != null) : !this.bookISBN.equals(other.bookISBN))
+        {
+            if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): Book ISBN does not match");
+                    }
+            return false;
+        }
+        if (this.count != other.count)
+        {
+            if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): Book count does not match");
+                    }
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 41 * hash + (this.bookISBN != null ? this.bookISBN.hashCode() : 0);
+        hash = 41 * hash + this.count;
+        return hash;
+    }
+
+    
 
     public AtomicOrder(String isbn, int count)
     {

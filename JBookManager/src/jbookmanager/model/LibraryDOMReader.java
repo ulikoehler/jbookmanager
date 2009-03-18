@@ -14,7 +14,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -106,14 +105,22 @@ public class LibraryDOMReader
         //Get a list of all child nodes == the atomic orders
         NodeList childNodes = orderElement.getElementsByTagName("atomicOrder");
 
+        childNodes.getLength();
+        if (logger.isTraceEnabled())
+        {
+            logger.log(Level.TRACE, "Parsing " + childNodes.getLength() + " atomic orders for order '" + ret.getName() +
+                    "'");
+        }
+
         for (int i = 0; i < childNodes.getLength(); i++)
         {
             Element node = (Element) childNodes.item(i);
             //Log
             if (logger.isTraceEnabled())
-                    {
-                        logger.log(Level.TRACE, "Parsing atomic order with ISBN = \"" + node.getAttribute("isbn") + "\" and count = " + Integer.parseInt(node.getAttribute("count")));
-                    }
+            {
+                logger.log(Level.TRACE, "Parsing atomic order with ISBN = \"" + node.getAttribute("isbn") +
+                        "\" and count = " + Integer.parseInt(node.getAttribute("count")));
+            }
             //Add the atomic order to the order
             ret.addAtomicOrder(node.getAttribute("isbn"), Integer.parseInt(node.getAttribute("count")));
         }
