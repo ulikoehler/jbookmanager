@@ -4,10 +4,11 @@
  */
 package jbookmanager.model;
 
-import jbookmanager.model.LibraryManager;
 import java.io.Serializable;
 import jbookmanager.model.*;
 import java.util.Vector;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
 
 /**
  *
@@ -16,6 +17,8 @@ import java.util.Vector;
 public class OrderManager implements Serializable
 {
     private Vector<Order> orders;
+    private Logger logger = Logger.getLogger(OrderManager.class);
+
 
     @Override
     public int hashCode()
@@ -39,7 +42,27 @@ public class OrderManager implements Serializable
         final OrderManager other = (OrderManager) obj;
         if (this.orders != other.orders && (this.orders == null || !this.orders.equals(other.orders)))
         {
-            return false;
+            for (Order order : orders)
+            {
+                boolean state = false; //True if two books matched
+                for (Order otherOrder : other.orders)
+                {
+                    if (order.equals(otherOrder))
+                    {
+                        state = true;break;
+                    }
+                }
+                //If state == true, continue
+                if (!state)
+                {
+                    if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): The order named " + order.getName() +
+                                " doesn't match any order in the other Library instance.");
+                    }
+                    return false;
+                }
+            }
         }
         return true;
     }

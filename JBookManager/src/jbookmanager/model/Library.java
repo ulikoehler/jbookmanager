@@ -61,7 +61,7 @@ public class Library implements Serializable
                 {
                     if (book.equals(otherBook))
                     {
-                        state = true;
+                        state = true;break;
                     }
                 }
                 //If state == true, continue

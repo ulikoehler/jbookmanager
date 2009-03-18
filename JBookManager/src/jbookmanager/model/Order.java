@@ -6,6 +6,8 @@ package jbookmanager.model;
 
 import java.io.Serializable;
 import java.util.Vector;
+import org.apache.log4j.Logger;
+import org.apache.log4j.Level;
 
 /**
  *
@@ -41,7 +43,27 @@ public class Order implements Serializable
         }
         if (this.data != other.data && (this.data == null || !this.data.equals(other.data)))
         {
-            return false;
+            for (AtomicOrder order : data)
+            {
+                boolean state = false; //True if two books matched
+                for (AtomicOrder otherOrder : other.data)
+                {
+                    if (order.equals(otherOrder))
+                    {
+                        state = true;break;
+                    }
+                }
+                //If state == true, continue
+                if (!state)
+                {
+                    if (logger.isTraceEnabled())
+                    {
+                        logger.log(Level.TRACE, "equals(): The atomic order referencing " + order.getBookISBN() +
+                                " doesn't match any atomic order in the other Library instance.");
+                    }
+                    return false;
+                }
+            }
         }
         return true;
     }
@@ -133,4 +155,5 @@ public class Order implements Serializable
     }
     private String name;
     private Vector<AtomicOrder> data;
+    private static Logger logger = Logger.getLogger(Order.class);
 }
